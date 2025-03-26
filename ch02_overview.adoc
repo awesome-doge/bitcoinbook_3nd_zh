@@ -1,629 +1,243 @@
 [[ch02_bitcoin_overview]]
-== How Bitcoin Works
+== 比特幣如何運作
 
-The Bitcoin system, unlike traditional banking and
-payment systems, does not require trust in third parties. Instead of a central
-trusted authority, in Bitcoin, each user can use software running on
-their own computer to verify the correct operation of every
-aspect of the Bitcoin system.
-In this chapter, we will examine Bitcoin from a high level by tracking a
-single transaction through the Bitcoin system and watch as it
-is recorded on the blockchain, the distributed journal of all
-transactions. Subsequent chapters will delve into the technology behind
-transactions, the network, and ((("Bitcoin", "operational overview", id="bitcoin-operational-overview-ch2")))((("blockchain explorers", id="blockchain-explorers")))mining.
+與傳統銀行和支付系統不同，比特幣系統不需要信任第三方。在比特幣中，每個用戶都可以使用在自己電腦上運行的軟體來驗證比特幣系統的每個方面是否正確運作。
 
-=== Bitcoin Overview
+在本章中，我們將通過追蹤比特幣系統中的單筆交易，並觀察它如何被記錄在區塊鏈（所有交易的分散式日誌）中，從高層次檢視比特幣。後續章節將深入探討交易、網路和挖礦背後的技術。
+
+=== 比特幣概述
 
 ++++
 <p class="fix_tracking">
-The Bitcoin system consists of users with wallets containing keys,
-transactions that are propagated across the network, and miners who
-produce (through competitive computation) the consensus blockchain,
-which is the authoritative journal of all transactions.
+比特幣系統由擁有包含密鑰的錢包的用戶、在網路上傳播的交易，以及通過競爭性運算產生共識區塊鏈（所有交易的權威日誌）的礦工組成。
 </p>
 
 <p class="fix_tracking2">
-Each example in this chapter is based
-on an actual transaction made on the Bitcoin network, simulating the
-interactions between several users by sending
-funds from one wallet to another. While tracking a transaction through
-the Bitcoin network to the blockchain, we will use a <em>blockchain
-explorer</em> site to visualize each step. A blockchain explorer is a web
-application that operates as a Bitcoin search engine, in that it allows
-you to search for addresses, transactions, and blocks and see the
-relationships and flows between them.
+本章中的每個範例都基於比特幣網路上的實際交易，通過從一個錢包向另一個錢包發送資金來模擬多個用戶之間的互動。在追蹤交易通過比特幣網路到區塊鏈的過程中，我們將使用_區塊鏈瀏覽器_網站來視覺化每個步驟。區塊鏈瀏覽器是一個作為比特幣搜尋引擎運作的網頁應用程式，它允許你搜尋地址、交易和區塊，並查看它們之間的關係和流向。
 </p>
 ++++
 
-Popular blockchain explorers include the following:
+受歡迎的區塊鏈瀏覽器包括：
 
 * https://blockstream.info[Blockstream Explorer]
 * https://mempool.space[Mempool.Space]
 * https://live.blockcypher.com[BlockCypher Explorer]
 
-Each of these has a search function that can take a Bitcoin address,
-transaction hash, block number, or block hash and retrieve corresponding
-information from the Bitcoin network. With each transaction or block
-example, we will provide a URL so you can look it up yourself and study
-it in detail.
+每個瀏覽器都有一個搜尋功能，可以接受比特幣地址、交易哈希值、區塊號碼或區塊哈希值，並從比特幣網路中檢索相應的資訊。對於每個交易或區塊範例，我們將提供一個URL，讓你可以自己查看並詳細研究它。
 
 [[block-explorer-privacy]]
-.Block Explorer Privacy Warning
+.區塊鏈瀏覽器隱私警告
 [WARNING]
 ====
-Searching information((("privacy", "blockchain explorers"))) on a block explorer may disclose to its operator
-that you're interested in that information, allowing them to associate
-it with your IP address, browser details, past searches, or other
-identifiable information.  If you look up the transactions in this book,
-the operator of the block explorer might guess that you're learning
-about Bitcoin, which shouldn't be a problem.  But if you look up your
-own transactions, the operator may be able to guess how many bitcoins
-you've received, spent, and ((("Bitcoin", "operational overview", startref="bitcoin-operational-overview-ch2")))((("blockchain explorers", startref="blockchain-explorers")))currently own.
+在區塊鏈瀏覽器上搜尋資訊可能會向運營商披露你對該資訊感興趣，使他們能夠將其與你的IP地址、瀏覽器詳情、過去的搜尋或其他可識別資訊關聯起來。如果你查看本書中的交易，區塊鏈瀏覽器的運營商可能會猜測你正在學習比特幣，這應該不是問題。但如果你查看自己的交易，運營商可能能夠猜測你收到了多少比特幣、花費了多少，以及目前擁有多少。
 ====
 
 [[spending_bitcoin]]
-=== Buying from an Online Store
+=== 從線上商店購買
 
-Alice, ((("transactions", "spending bitcoins", id="transaction-spend")))((("bitcoins", "spending", id="bitcoin-spend")))((("spending bitcoins", id="spend-bitcoin")))introduced in the previous chapter, is a new user who has just
-acquired her first bitcoins. In <<getting_first_bitcoin>>, Alice met with
-her friend Joe to exchange some cash for bitcoins. Since then, Alice has
-bought additional bitcoins.  Now Alice will make
-her first spending transaction, buying access to a premium podcast episode from Bob's online store.
+在上一章介紹的Alice是一位剛獲得第一批比特幣的新用戶。在<<getting_first_bitcoin>>中，Alice與她的朋友Joe見面，用現金換取了一些比特幣。從那時起，Alice購買了更多比特幣。現在Alice將進行她的第一筆支出交易，從Bob的線上商店購買一個高級播客節目的存取權。
 
-Bob's web store recently started accepting bitcoin payments by adding a
-Bitcoin option to its website. The prices at Bob's store are listed in
-the local currency (US dollars), but at checkout, customers have the
-option of paying in either dollars or bitcoin.
+Bob的網上商店最近開始接受比特幣支付，在其網站上添加了比特幣選項。Bob商店的價格以當地貨幣（美元）列出，但在結帳時，客戶可以選擇用美元或比特幣支付。
 
-Alice finds the podcast episode she wants to buy and proceeds to the checkout page. At checkout,
-Alice is offered the option to pay with bitcoin in addition to the
-usual options. The checkout cart displays the price in US dollars and
-also in bitcoin (BTC), at Bitcoin's prevailing exchange rate.
+Alice找到她想買的播客節目並進入結帳頁面。在結帳時，除了通常的選項外，Alice還被提供使用比特幣支付的選項。購物車顯示美元價格，同時也顯示比特幣（BTC）價格，使用比特幣的現行匯率。
 
-Bob's
-ecommerce system will automatically create a QR code((("invoices")))((("QR codes"))) containing an
-_invoice_ (<<invoice-QR>>).
-
-////
-TODO: Replace QR code with test-BTC address
-////
+Bob的電子商務系統會自動創建一個包含_發票_的QR碼（<<invoice-QR>>）。
 
 [[invoice-QR]]
-.Invoice QR code.
+.發票QR碼。
 image::images/mbc3_0201.png["payment-request"]
 
-Unlike a QR code that simply contains a destination Bitcoin address, this
-invoice is a QR-encoded URI that contains a destination address,
-a payment amount, and a description.
-This allows a Bitcoin wallet application to prefill the
-information used to send the payment while showing a human-readable
-description to the user. You can scan the QR code with a bitcoin wallet
-application to see what Alice would see:
-
+與僅僅包含目標比特幣地址的QR碼不同，這個發票是一個QR編碼的URI，包含目標地址、支付金額和描述。這允許比特幣錢包應用程式預填發送支付所需的資訊，同時向用戶顯示人類可讀的描述。你可以用比特幣錢包應用程式掃描QR碼來看看Alice會看到什麼：
 
 [[invoice-URI]]
-.The invoice QR code encodes the following URI, defined in BIP21:
+.發票QR碼編碼了以下URI，定義在BIP21中：
 ----
 bitcoin:bc1qk2g6u8p4qm2s2lh3gts5cpt2mrv5skcuu7u3e4?amount=0.01577764&
 label=Bob%27s%20Store&
 message=Purchase%20at%20Bob%27s%20Store
 
-Components of the URI
+URI的組成部分
 
-A Bitcoin address: "bc1qk2g6u8p4qm2s2lh3gts5cpt2mrv5skcuu7u3e4"
-The payment amount: "0.01577764"
-A label for the recipient address: "Bob's Store"
-A description for the payment: "Purchase at Bob's Store"
+比特幣地址："bc1qk2g6u8p4qm2s2lh3gts5cpt2mrv5skcuu7u3e4"
+支付金額："0.01577764"
+接收地址的標籤："Bob's Store"
+支付的描述："Purchase at Bob's Store"
 ----
 
 [TIP]
 ====
-Try to scan this with your wallet to see
-the address and amount but DO NOT SEND MONEY.
+試著用你的錢包掃描這個QR碼來查看地址和金額，但_不要_發送資金。
 ====
 
-Alice uses her smartphone to scan the barcode on display. Her smartphone
-shows a payment for the correct amount to +Bob's Store+ and she selects Send to
-authorize the payment. Within a few seconds (about the same amount of
-time as a credit card authorization), Bob sees the transaction on the
-register.
+Alice使用她的智慧型手機掃描顯示的條碼。她的智慧型手機顯示向+Bob's Store+支付正確金額的資訊，她選擇發送來授權支付。在幾秒鐘內（大約與信用卡授權相同的時間），Bob在收銀機上看到交易。
 
 [NOTE]
 ====
-The
-Bitcoin network((("bitcoins", "fractional values")))((("fractional values of bitcoins")))((("satoshis")))((("millibitcoins"))) can transact in fractional values, e.g., from
-millibitcoin (1/1000th of a bitcoin) down to 1/100,000,000th of a
-bitcoin, which is known as a satoshi.  This book uses the same
-pluralization rules used for dollars and other traditional currencies
-when talking about amounts greater than one bitcoin and when using
-decimal notation, such as "10 bitcoins" or "0.001 bitcoins."  The same
-rules also apply to other bitcoin bookkeeping units, such as
-millibitcoins and satoshis.
+比特幣網路可以進行小數點交易，例如從毫比特幣（比特幣的千分之一）到比特幣的億分之一，這被稱為聰（satoshi）。本書在談論大於一個比特幣的金額和使用小數表示法時，使用與美元和其他傳統貨幣相同的複數規則，例如"10比特幣"或"0.001比特幣"。相同的規則也適用於其他比特幣記帳單位，如毫比特幣和聰。
 ====
 
-You can use a block explorer to examine blockchain data, such as the payment made to Bob in Alice's((("transactions", "spending bitcoins", startref="transaction-spend")))((("bitcoins", "spending", startref="bitcoin-spend")))((("spending bitcoins", startref="spend-bitcoin"))) https://oreil.ly/hAeyh[transaction].
+你可以使用區塊鏈瀏覽器來檢查區塊鏈數據，例如Alice向Bob的https://oreil.ly/hAeyh[交易]。
 
-In the following sections, we will examine this transaction in more
-detail. We'll see how Alice's wallet constructed it, how it was
-propagated across the network, how it was verified, and finally, how Bob
-can spend that amount in subsequent transactions.
+在以下各節中，我們將更詳細地檢視這筆交易。我們將看到Alice的錢包如何構建它、它如何在網路上傳播、如何被驗證，以及最後Bob如何在後續交易中花費這筆金額。
 
-=== Bitcoin Transactions
+=== 比特幣交易
 
-In ((("transactions", "defined")))((("bitcoins", "transactions", see="transactions")))simple terms, a transaction tells the
-network that the owner of certain bitcoins has authorized the transfer
-of that value to another owner. The new owner can now spend the bitcoin
-by creating another transaction that authorizes the transfer to another
-owner, and so on, in a chain of ownership.
+簡單來說，交易告訴網路某些比特幣的所有者已授權將該價值轉移給另一個所有者。新所有者現在可以通過創建另一個交易來花費比特幣，該交易授權轉移給另一個所有者，以此類推，形成所有權鏈。
 
-==== Transaction Inputs and Outputs
+==== 交易輸入和輸出
 
-Transactions((("transactions", "inputs", id="transaction-input-ch2")))((("transactions", "outputs", id="transaction-output-ch2")))((("inputs", id="input")))((("outputs", id="output"))) are like lines in a double-entry
-bookkeeping ledger.  Each transaction contains one or more _inputs_,
-which spend funds. On the other side of
-the transaction, there are one or more _outputs_, which receive funds.
-The inputs
-and outputs do not necessarily add up to the same
-amount. Instead, outputs add up to slightly less than inputs and the
-difference represents an ((("transaction fees")))implied _transaction fee_, which is a small
-payment collected by the miner who includes the transaction in the
-blockchain. A Bitcoin transaction is shown as a bookkeeping ledger entry in
-<<transaction-double-entry>>.
+交易就像複式記帳分類帳中的條目。每筆交易包含一個或多個_輸入_，用於花費資金。在交易的另一側，有一個或多個_輸出_，用於接收資金。輸入和輸出的總和不一定相同。相反，輸出的總和略小於輸入的總和，差額代表隱含的_交易費用_，這是由將交易包含在區塊鏈中的礦工收取的小額費用。比特幣交易在<<transaction-double-entry>>中顯示為記帳分類帳條目。
 
-The transaction also contains proof of ownership for each amount of
-bitcoins (inputs) whose value is being spent, in the form of a digital
-signature from the owner, which can be independently validated by
-anyone. In Bitcoin terms, spending
-is signing a transaction that transfers value from a previous
-transaction over to a new owner identified by a Bitcoin address.
+交易還包含每個被花費的比特幣金額（輸入）的所有權證明，以所有者的數位簽名形式，任何人都可以獨立驗證。在比特幣術語中，花費就是簽署一筆交易，將價值從之前的交易轉移給由比特幣地址識別的新所有者。
 
 [[transaction-double-entry]]
-.Transaction as double-entry bookkeeping.
+.交易作為複式記帳。
 image::images/mbc3_0202.png["Transaction Double-Entry"]
 
-==== Transaction Chains
+==== 交易鏈
 
-Alice's ((("transaction chains", id="transaction-chains")))payment to Bob's Store uses a
-previous transaction's output as its input. In the previous chapter,
-Alice received bitcoins from her friend Joe in return for cash.
-We've labeled that as _Transaction 1_ (Tx1) in <<transaction-chain>>.
+Alice向Bob商店的支付使用之前交易的輸出作為其輸入。在上一章中，Alice從她的朋友Joe那裡收到了比特幣，以換取現金。我們在<<transaction-chain>>中將其標記為_交易1_（Tx1）。
 
-Tx1 sent 0.001 bitcoins (100,000 satoshis) to an output locked by
-Alice's key. Her new transaction to Bob's Store (Tx2) references the
-previous output as an input.  In the illustration, we show that
-reference using an arrow and by labeling the input as "Tx1:0".  In an
-actual transaction, the reference is the 32-byte transaction identifier
-(txid) for the transaction where Alice received the money from Joe.  The
-":0" indicates the position of the output where Alice received the
-money; in this case, the first position (position 0).
+Tx1向被Alice的密鑰鎖定的輸出發送了0.001比特幣（100,000聰）。她向Bob商店的新交易（Tx2）引用了之前的輸出作為輸入。在圖示中，我們使用箭頭並將輸入標記為"Tx1:0"來顯示該引用。在實際交易中，引用是Alice從Joe那裡收到資金的交易的32位元組交易識別碼（txid）。":0"表示Alice收到資金的輸出位置；在這種情況下，是第一個位置（位置0）。
 
-As shown, actual Bitcoin transactions don't
-explicitly include the value of their input.  To determine the value of
-an input, software needs to use the input's reference to find the
-previous transaction output being spent.
+如圖所示，實際的比特幣交易並不明確包含其輸入的價值。要確定輸入的價值，軟體需要使用輸入的引用來找到被花費的之前交易輸出。
 
-Alice's Tx2 contains two new outputs, one paying 75,000 satoshis for the
-podcast and another paying 20,000 satoshis back to Alice to receive
-change.
-
-////
-@startditaa
-      Transaction 1             Tx2                   Tx3
-     Inputs  Outputs         In     Out           In      Out
-   +-------+---------+   +-------+--------+    +-------+--------+
-   |       |         |   |       | cDDD   |    |       |        |
-<--+ Tx0꞉0 | 100,000 |<--+ Tx1꞉0 | 20,000 |  +-+ Tx2꞉1 | 67,000 |
-   |       |         |   |       |        |  | |       |        |
-   +-------+---------+   +-------+--------+  | +-------+--------+
-   |       | cDDD    |   |       |        |  | |       |        |
-   |       | 500,000 |   |       | 75,000 |<-+ |       |        |
-   |       |         |   |       |        |    |       |        |
-   +-------+---------+   +-------+--------+    +-------+--------+
-        Fee꞉ (unknown)           Fee꞉ 5,000            Fee꞉ 8,000
-@enddittaa
-////
+Alice的Tx2包含兩個新輸出，一個支付75,000聰用於播客，另一個支付20,000聰返回給Alice作為找零。
 
 [[transaction-chain]]
-.A chain of transactions, where the output of one transaction is the input of the next transaction.
+.交易鏈，其中一個交易的輸出是下一個交易的輸入。
 image::images/mbc3_0203.png["Transaction chain"]
 
 [TIP]
 ====
-Serialized Bitcoin transactions--the data format that software uses for
-sending transactions--encodes the value to transfer using an integer
-of the smallest defined onchain unit of value.  When Bitcoin was first
-created, this unit didn't have a name and some developers simply called
-it the _base unit._  Later many users began calling this unit a
-_satoshi_ (sat) in honor of Bitcoin's creator.  In <<transaction-chain>>
-and some other illustrations in this book, we use satoshi values because
-that's what the protocol itself ((("satoshis")))uses.
+序列化的比特幣交易--軟體用於發送交易的數據格式--使用最小定義的鏈上價值單位的整數來編碼要轉移的價值。當比特幣首次創建時，這個單位沒有名稱，一些開發者簡單地稱它為_基本單位_。後來許多用戶開始稱這個單位為_聰_（sat），以紀念比特幣的創建者。在<<transaction-chain>>和本書的其他一些圖示中，我們使用聰值，因為這是協議本身使用的單位。
 ====
 
-==== Making Change
+==== 找零
 
-In addition((("transactions", "change output", id="transaction-change-output")))((("change output", id="change-output")))((("outputs", "change output", id="output-change"))) to one or more outputs that pay the receiver of
-bitcoins, many transactions will also include an output that pays the
-spender of the bitcoins, called a _change_ output.
-This is because transaction inputs,
-like currency notes, cannot be partly spent. If you purchase a $5 US item in a store but use a $20 bill to pay for the item, you
-expect to receive $15 in change. The same concept applies to
-Bitcoin transaction inputs. If you purchased an item that costs 5
-bitcoins but only had an input worth 20 bitcoins to use, you would send one
-output of 5 bitcoins to the store owner and one output of 15 bitcoins back
-to yourself as change (not counting your transaction fee).
+除了向比特幣接收者支付的一個或多個輸出外，許多交易還會包含一個向比特幣花費者支付的輸出，稱為_找零_輸出。這是因為交易輸入，就像紙幣一樣，不能被部分花費。如果你在商店購買5美元的商品，但使用20美元的鈔票支付，你會期望收到15美元的找零。相同的概念適用於比特幣交易輸入。如果你購買價值5比特幣的商品，但只有一個價值20比特幣的輸入可以使用，你會向商店所有者發送一個5比特幣的輸出，並向自己發送一個15比特幣的輸出作為找零（不計算你的交易費用）。
 
-At the level of the Bitcoin protocol, there is no difference between a
-change output (and the address it pays, called a _change address_) and a
-payment output.
+在比特幣協議層面，找零輸出（及其支付的地址，稱為_找零地址_）和支付輸出沒有區別。
 
-Importantly, the change address does not have to be the
-same address as that of the input and, for privacy reasons, is often a new
-address from the owner's wallet.  In ideal circumstances, the two
-different uses of outputs both use never-before-seen addresses and
-otherwise look identical, preventing any third party from determining
-which outputs are change and which are payments.  However, for
-illustration purposes, we've added shading to the change outputs in
-<<transaction-chain>>.
+重要的是，找零地址不必與輸入的地址相同，為了隱私原因，通常是所有者錢包中的新地址。在理想情況下，輸出的兩種不同用途都使用從未見過的地址，並且在其他方面看起來相同，防止任何第三方確定哪些輸出是找零，哪些是支付。然而，為了說明目的，我們在<<transaction-chain>>中為找零輸出添加了陰影。
 
-Not every transaction has a change output.  Those that don't are ((("changeless transactions")))((("transactions", "changeless")))called
-_changeless transactions_, and they can have only a single output.
-Changeless transactions are only a practical option if the amount being
-spent is roughly the same as the amount available in the transaction
-inputs minus the anticipated transaction fee.  In <<transaction-chain>>,
-we see Bob creating Tx3 as a changeless transaction that spends the
-output he received in Tx2.
+並非每筆交易都有找零輸出。那些沒有找零輸出的交易被稱為_無找零交易_，它們只能有一個輸出。無找零交易只有在花費金額大致等於交易輸入中的可用金額減去預期的交易費用時才是一個實用的選項。在<<transaction-chain>>中，我們看到Bob創建Tx3作為一筆無找零交易，花費他在Tx2中收到的輸出。
 
-==== Coin Selection
+==== 幣種選擇
 
-Different wallets((("transactions", "coin selection")))((("coin selection in transactions")))((("selecting", "coins in transactions"))) use different strategies when choosing which
-inputs to use in a payment, called _coin selection_.
+不同的錢包在選擇支付中使用的輸入時使用不同的策略，稱為_幣種選擇_。
 
-They might aggregate many small
-inputs, or use one that is equal to or larger than the desired payment.
-Unless the wallet can aggregate inputs in such a way to exactly match
-the desired payment plus transaction fees, the wallet will need to
-generate some change. This is very similar to how people handle cash. If
-you always use the largest bill in your pocket, you will end up with a
-pocket full of loose change. If you only use the loose change, you'll
-often have only big bills. People subconsciously find a balance between
-these two extremes, and Bitcoin wallet developers strive to program this
-balance.
+它們可能會聚合許多小額輸入，或使用一個等於或大於所需支付的輸入。除非錢包能夠以某種方式聚合輸入以完全匹配所需支付加上交易費用，否則錢包將需要生成一些找零。這與人們處理現金的方式非常相似。如果你總是使用口袋裡最大的鈔票，你最終會得到滿口袋的零錢。如果你只使用零錢，你通常只會有大鈔。人們下意識地在這兩個極端之間找到平衡，比特幣錢包開發者努力編程實現這種平衡。
 
-==== Common Transaction Forms
+==== 常見交易形式
 
-A very ((("transactions", "common types", id="transaction-common-ch2")))common form of transaction is a simple payment. This type of
-transaction has one input and two outputs and is shown in
-<<transaction-common>>.
+最常見的交易形式是簡單支付。這種類型的交易有一個輸入和兩個輸出，如<<transaction-common>>所示。
 
 [[transaction-common]]
-.Most common transaction.
+.最常見的交易。
 image::images/mbc3_0204.png["Common Transaction"]
 
-Another common form of transaction ((("consolidation transactions")))is a _consolidation transaction_, which spends several inputs
-into a single output (<<transaction-consolidating>>). This represents
-the real-world equivalent of exchanging a pile of coins and currency
-notes for a single larger note. Transactions like these are sometimes
-generated by wallets and businesses to clean up lots of smaller amounts.
+另一種常見的交易形式是_整合交易_，它將多個輸入花費到單個輸出中（<<transaction-consolidating>>）。這代表現實世界中將一堆硬幣和紙幣兌換成單張較大面額紙幣的等效行為。錢包和企業有時會生成這類交易來清理許多小額資金。
 
 [[transaction-consolidating]]
-.Consolidation transaction aggregating funds.
+.整合交易聚合資金。
 image::images/mbc3_0205.png["Aggregating Transaction"]
 
-Finally, another transaction form that is seen often on the
-blockchain ((("payment batching")))is _payment batching_, which pays to multiple outputs
-representing multiple recipients (<<transaction-distributing>>).
-This type of transaction is sometimes used by commercial entities to
-distribute funds, such as when processing payroll payments to multiple employees.
+最後，在區塊鏈上經常看到的另一種交易形式是_批量支付_，它向代表多個接收者的多個輸出支付（<<transaction-distributing>>）。這種類型的交易有時被商業實體用於分配資金，例如向多個員工處理工資支付。
 
 [[transaction-distributing]]
-.Batch transaction distributing funds.
+.批量交易分配資金。
 image::images/mbc3_0206.png["Distributing Transaction"]
 
-=== Constructing a Transaction
+=== 構建交易
 
-Alice's wallet((("transactions", "constructing", id="transaction-construct"))) application contains all
-the logic for selecting inputs and generating outputs to build a
-transaction to Alice's specification. Alice only needs to choose a
-destination, amount, and transaction fee, and the rest happens in the wallet
-application without her seeing the details. Importantly, if a wallet
-already knows what inputs it controls, it can construct transactions
-even if it is completely offline.
-Like writing a check at home and later sending it to the bank in an
-envelope, the transaction does not need to be constructed and signed
-while connected to the Bitcoin network.
+Alice的錢包應用程式包含選擇輸入和生成輸出以根據Alice的規格構建交易的所有邏輯。Alice只需要選擇目的地、金額和交易費用，其餘的都在錢包應用程式中進行，她看不到細節。重要的是，如果錢包已經知道它控制哪些輸入，它可以在完全離線的情況下構建交易。就像在家寫支票，然後稍後通過信封寄給銀行一樣，交易不需要在連接到比特幣網路時構建和簽署。
 
-==== Getting the Right Inputs
+==== 獲取正確的輸入
 
-Alice's wallet
-application ((("inputs", "constructing transactions")))will first have to find inputs that can pay the amount she
-wants to send to Bob. Most wallets keep track of all the available
-outputs belonging to addresses in the wallet. Therefore, Alice's wallet
-would contain a copy of the transaction output from Joe's transaction,
-which was created in exchange for cash (see <<getting_first_bitcoin>>).
-A Bitcoin wallet application that runs on a full node actually
-contains a copy of every confirmed transaction's ((("UTXOs (unspent transaction outputs)")))unspent outputs, called
-_unspent transaction outputs_ (UTXOs).
-However, because full nodes use more resources, many
-user wallets run lightweight clients that track only the user's own
-UTXOs.
+Alice的錢包應用程式首先必須找到可以支付她想發送給Bob的金額的輸入。大多數錢包都會追蹤屬於錢包中地址的所有可用輸出。因此，Alice的錢包會包含來自Joe交易的交易輸出副本，該交易是用現金創建的（見<<getting_first_bitcoin>>）。在完整節點上運行的比特幣錢包應用程式實際上包含每個已確認交易的未使用輸出副本，稱為_未使用交易輸出_（UTXOs）。然而，因為完整節點使用更多資源，許多用戶錢包運行輕量級客戶端，只追蹤用戶自己的UTXOs。
 
-In this case, this single
-UTXO is sufficient to pay for the podcast. Had this not been the case,
-Alice's wallet application might have to combine several
-smaller UTXOs, like picking coins from a purse, until it could
-find enough to pay for the podcast. In both cases, there might be a need
-to get some change back, which we will see in the next section, as the
-wallet application creates the transaction outputs (payments).
+在這種情況下，這個單個UTXO足以支付播客的費用。如果不是這種情況，Alice的錢包應用程式可能必須組合幾個較小的UTXO，就像從錢包中挑選硬幣一樣，直到找到足夠的錢來支付播客。在這兩種情況下，都可能需要一些找零，我們將在下一節中看到，當錢包應用程式創建交易輸出（支付）時。
 
+==== 創建輸出
 
-==== Creating the Outputs
+交易輸出是通過腳本創建的，腳本說的是類似這樣的話："這個輸出支付給能夠提供與Bob的公開地址對應的密鑰簽名的人。"因為只有Bob擁有與該地址對應的密鑰的錢包，只有Bob的錢包能夠提供這樣的簽名來稍後花費這個輸出。因此，Alice將用對Bob簽名的要求來_限制_輸出價值。
 
-A transaction output((("outputs", "constructing transactions"))) is
-created with a
-script that says something like, "This output is paid to whoever can
-present a signature from the key corresponding to Bob's public address."
-Because only Bob has the wallet with the keys corresponding to that
-address, only Bob's wallet can present such a signature to later spend this
-output. Alice will therefore _encumber_ the output value with a demand
-for a signature from Bob.
+這筆交易還將包含第二個輸出，因為Alice的資金包含比播客成本更多的錢。Alice的找零輸出是在向Bob支付的同一筆交易中創建的。本質上，Alice的錢包將她的資金分成兩個輸出：一個給Bob，一個返回給她自己。她然後可以在後續交易中花費找零輸出。
 
-This transaction will also include a second output ((("change output")))because Alice's
-funds contain more money than the cost of the
-podcast. Alice's change
-output is created in the very same
-transaction as the payment to Bob. Essentially, Alice's wallet breaks
-her funds into two outputs: one to Bob and one back to herself. She can
-then spend the change output in a subsequent transaction.
-
-Finally, for the transaction to be processed by the network in a((("transaction fees"))) timely
-fashion, Alice's wallet application will add a small fee. The fee is not
-explicitly stated in the transaction; it is implied by the difference in value between
-inputs and outputs.  This transaction fee is collected by the
-miner as a fee for including the transaction in a block
-that gets recorded on the blockchain.
+最後，為了讓交易能夠及時被網路處理，Alice的錢包應用程式將添加一筆小額費用。費用沒有在交易中明確說明；它是由輸入和輸出之間的價值差額隱含的。這筆交易費用由礦工作為將交易包含在記錄在區塊鏈上的區塊中的費用收取。
 
 [[transaction-alice-url]]
 [TIP]
 ====
-View the https://oreil.ly/GwBq1[transaction from Alice to Bob's Store].
+查看https://oreil.ly/GwBq1[Alice向Bob商店的交易]。
 ====
 
-==== Adding the Transaction to the Blockchain
+==== 將交易添加到區塊鏈
 
-The ((("transactions", "adding to blockchain", id="transaction-add-blockchain")))((("blockchain", "adding transactions to", id="blockchain-add-transaction")))transaction created by Alice's wallet application
-contains everything necessary to confirm ownership of the funds and
-assign new owners. Now, the transaction must be transmitted to the
-Bitcoin network where it will become part of the blockchain. In the next
-section we will see how a transaction becomes part of a new block and
-how the block is mined. Finally, we will see how the new block, once
-added to the blockchain, is increasingly trusted by the network as more
-blocks are added.
+由Alice的錢包應用程式創建的交易包含確認資金所有權和分配新所有者所需的一切。現在，交易必須傳輸到比特幣網路，在那裡它將成為區塊鏈的一部分。在下一節中，我們將看到交易如何成為新區塊的一部分，以及區塊如何被挖出。最後，我們將看到新區塊一旦添加到區塊鏈中，隨著更多區塊的添加，網路對它的信任度越來越高。
 
-===== Transmitting the transaction
+===== 傳輸交易
 
-Because the transaction contains all
-the information necessary for it to be processed, it does not matter how or where it
-is transmitted to the Bitcoin network. The Bitcoin network is a
-peer-to-peer network, with each Bitcoin peer participating by
-connecting to several other Bitcoin peers. The purpose of the Bitcoin
-network is to propagate transactions and blocks to all participants.
+因為交易包含處理它所需的所有資訊，所以它如何或在哪裡傳輸到比特幣網路並不重要。比特幣網路是一個點對點網路，每個比特幣節點通過連接到其他幾個比特幣節點來參與。比特幣網路的目的是向所有參與者傳播交易和區塊。
 
-===== How it propagates
+===== 如何傳播
 
+比特幣點對點網路中的節點是具有軟體邏輯和數據的程式，這些邏輯和數據使它們能夠完全驗證新交易的正確性。節點之間的連接通常被視覺化為圖中的邊（線），節點本身是節點（點）。因此，比特幣節點通常被稱為"完整驗證節點"，簡稱_完整節點_。
 
-Peers in ((("Bitcoin", "as peer-to-peer network", secondary-sortas="peer-to-peer network")))((("peer-to-peer networks, Bitcoin as")))the Bitcoin peer-to-peer network are programs that have both
-the software logic and the data necessary for them to fully verify the
-correctness of a new transaction.  The connections between peers are
-often visualized as edges (lines) in a graph, with the peers themselves
-being the nodes (dots).  For that reason, Bitcoin peers are commonly
-called "full verification nodes," ((("full nodes")))or _full nodes_ for short.
+Alice的錢包應用程式可以通過任何類型的連接向任何比特幣節點發送新交易：有線、WiFi、行動網路等。它也可以將交易發送給另一個程式（如區塊鏈瀏覽器），該程式將轉發給節點。她的比特幣錢包不必直接連接到Bob的比特幣錢包，也不必使用Bob提供的網際網路連接，儘管這兩種選擇也是可能的。任何收到它之前未見過的有效交易的比特幣節點都會將它轉發給它所連接的所有其他節點，這種傳播技術被稱為_八卦_。因此，交易迅速在點對點網路中傳播，在幾秒鐘內到達大部分節點。
 
-Alice's wallet application can send the new
-transaction to any Bitcoin node over any type of
-connection: wired, WiFi, mobile, etc.  It can also send the transaction
-to another program (such as a block explorer) that will relay it to a
-node.  Her Bitcoin wallet does not have
-to be connected to Bob's Bitcoin wallet directly and she does not have
-to use the internet connection offered by Bob, though both those
-options are possible too. Any Bitcoin node that receives a
-valid transaction it has not seen before will forward it to
-all other nodes to which it is connected, a propagation technique known
-((("gossiping")))as _gossiping_. Thus, the transaction rapidly propagates out across the
-peer-to-peer network, reaching a large percentage of the nodes within a
-few seconds.
+===== Bob的視角
 
-===== Bob's view
+如果Bob的比特幣錢包應用程式直接連接到Alice的錢包應用程式，Bob的錢包應用程式可能是第一個收到交易的。然而，即使Alice的錢包通過其他節點發送交易，它也會在幾秒鐘內到達Bob的錢包。Bob的錢包會立即將Alice的交易識別為入帳支付，因為它包含一個可由Bob的密鑰兌現的輸出。Bob的錢包應用程式也可以獨立驗證交易格式良好。如果Bob使用他自己的完整節點，他的錢包可以進一步驗證Alice的交易只花費有效的UTXOs。
 
-If Bob's Bitcoin wallet application is directly connected to Alice's
-wallet application, Bob's wallet application might be the first to
-receive the transaction. However, even if Alice's wallet sends the
-transaction through other nodes, it will reach Bob's wallet within a few
-seconds. Bob's wallet will immediately identify Alice's transaction as
-an incoming payment because it contains an output redeemable by Bob's
-keys. Bob's wallet application can also independently verify that the
-transaction is well formed.  If Bob is using his own full node, his
-wallet can further verify Alice's transaction only spends((("transactions", "constructing", startref="transaction-construct")))((("transactions", "adding to blockchain", startref="transaction-add-blockchain")))((("blockchain", "adding transactions to", startref="blockchain-add-transaction"))) valid UTXOs.
+=== 比特幣挖礦
 
-=== Bitcoin Mining
+Alice的交易現在在比特幣網路上傳播。它不會成為_區塊鏈_的一部分，直到它通過一個稱為_挖礦_的過程被包含在一個區塊中，並且該區塊已被完整節點驗證。見<<mining>>獲取詳細說明。
 
-Alice's transaction((("mining", "operational overview", id="mining-operational-overview"))) is now propagated on the Bitcoin
-network. It does not become part of the _blockchain_ until it is
-included in a block by a process called _mining_ and that block has been
-validated by full nodes. See
-<<mining>> for a detailed explanation.
-
-Bitcoin's system of counterfeit protection is based on computation.
-Transactions are bundled((("transactions", "in blocks", secondary-sortas="blocks")))((("blocks"))) into _blocks_.  Blocks have a very small header
-that must be formed in a very specific way, requiring an enormous
-amount of computation to get right--but only a small amount of
-computation to verify as correct.
-The mining process serves two purposes in Bitcoin:
+比特幣的防偽系統基於運算。交易被((("transactions", "in blocks", secondary-sortas="blocks")))((("blocks")))打包成_區塊_。區塊有一個非常小的標頭，必須以非常特定的方式形成，需要大量的運算才能正確--但只需要少量的運算就能驗證其正確性。挖礦過程在比特幣中有兩個目的：
 
 [role="less_space pagebreak-before"]
-* Miners can only
-receive honest income from creating blocks that follow all of((("consensus rules"))) Bitcoin's
-_consensus rules_.  Therefore, miners are normally incentivized to
-only include valid transactions in their blocks and the blocks they
-build upon.  This allows users to optionally make a trust-based
-assumption that any transaction in a block is a valid transaction.
+* 礦工只能通過創建遵循所有比特幣_共識規則_的區塊來獲得誠實的收入。因此，礦工通常被激勵只在他們的區塊和他們建立的區塊中包含有效交易。這允許用戶選擇性地做出基於信任的假設，即區塊中的任何交易都是有效交易。
 
-* Mining currently creates new bitcoins in each block, almost like a central bank
-printing new money. The amount of bitcoin created per block is limited
-and diminishes with time, following a fixed issuance schedule.
+* 挖礦目前每個區塊創建新的比特幣，幾乎像中央銀行印製新錢一樣。每個區塊創建的比特幣數量是有限的，並隨著時間推移而減少，遵循固定的發行時間表。
 
+挖礦在成本和獎勵之間達到了微妙的平衡。挖礦使用電力來解決運算問題。成功的礦工將以新比特幣和交易費用的形式收取_獎勵_。然而，只有在礦工只包含有效交易的情況下才能收取獎勵，比特幣協議的_共識_規則決定什麼是有效的。這種微妙的平衡為比特幣提供了安全性，而不需要中央權威。
 
-Mining achieves a fine balance between cost and reward. Mining uses
-electricity to solve a computational problem. A successful miner will
-collect ((("rewards")))a _reward_ in the form of new bitcoins and transaction fees.
-However, the reward will only be collected if the miner has only
-included valid transactions, with the Bitcoin protocol's rules for
-_consensus_ determining what is valid.  This delicate balance provides
-security for Bitcoin without a central authority.
+挖礦被設計為一個去中心化的抽獎。每個礦工可以通過創建一個_候選區塊_來創建自己的抽獎券，該區塊包含他們想要挖礦的新交易加上一些額外的數據欄位。礦工將他們的候選區塊輸入到一個特別設計的演算法中，該演算法((("hash functions")))擾亂（或"哈希"）數據，產生看起來與輸入數據完全不同的輸出。這個_哈希_函數對於相同的輸入總是產生相同的輸出--但沒有人能預測新輸入的輸出會是什麼樣子，即使它與之前的輸入只有細微的差別。如果哈希函數的輸出匹配由比特幣協議確定的模板，礦工就贏得了抽獎，比特幣用戶將接受包含其交易的區塊作為有效區塊。如果輸出不匹配模板，礦工對他們的候選區塊做一個小改變並再次嘗試。截至本文撰寫時，礦工在找到獲勝組合之前需要嘗試的候選區塊數量約為1680億兆。這也是哈希函數需要運行的次數。
 
-Mining is designed to be a decentralized lottery.  Each miner can create
-their own lottery ticket by creating ((("candidate blocks")))a _candidate block_ that includes
-the new transactions they want to mine plus some additional data fields.
-The miner inputs their candidate into a specially designed algorithm that
-scrambles((("hash functions"))) (or "hashes") the data, producing output that looks nothing
-like the input data.  This _hash_ function will always produce the same
-output for the same input--but nobody can predict what the output will
-look like for a new input, even if it is only slightly different from a
-previous input.  If the output of the hash function matches a template
-determined by the Bitcoin protocol, the miner wins the lottery and
-Bitcoin users will accept the block with its transactions as a
-valid block.  If the output doesn't match the template, the miner makes
-a small change to their candidate block and tries again.  As of this
-writing, the number of candidate blocks miners need to try before finding
-a winning combination is about 168 billion trillion.  That's also how
-many times the hash function needs to be run.
+然而，一旦找到獲勝組合，任何人都可以通過只運行一次哈希函數來驗證區塊是有效的。這使得有效區塊成為需要難以置信的工作量來創建但只需要微不足道的工作量來驗證的東西。簡單的驗證過程能夠概率性地證明工作已經完成，所以生成該證明所需的數據--在這種情況下是區塊--被稱為((("proof-of-work algorithm"))) _工作量證明（PoW）_。
 
-However, once a winning combination has been found, anyone can verify
-the block is valid by running the hash function just once.  That makes a
-valid block something that requires an incredible amount of work to
-create but only a trivial amount of work to verify.  The simple
-verification process is able to probabalistically prove the work was
-done, so the data necessary to generate that proof--in this case, the
-block--is called((("proof-of-work algorithm"))) _proof of work (PoW)_.
+交易被添加到新區塊中，優先考慮費率最高的交易，還有一些其他標準。每個礦工在從網路收到前一個區塊後立即開始挖礦新候選交易區塊的過程，知道其他礦工贏得了那一次抽獎。他們立即創建一個新的候選區塊，承諾前一個區塊，用交易填充它，並開始計算候選區塊的PoW。每個礦工在他們的候選區塊中包含一個特殊交易，該交易向他們自己的比特幣地址支付區塊獎勵加上候選區塊中包含的所有交易的交易費用總和。如果他們找到一個使候選區塊成為有效區塊的解決方案，在他們的成功區塊被添加到全球區塊鏈後，他們將收到這個獎勵，他們包含的獎勵交易變得可花費。參與礦池的礦工已經設置他們的軟體來創建將獎勵分配給礦池地址的候選區塊。從那裡，獎勵的一部分按他們貢獻的工作量比例分配給礦池礦工。
 
-Transactions are added to the new block, prioritized by the highest fee rate
-transactions first and a few other criteria. Each miner starts the
-process of mining a new candidate block of transactions as soon as they receive the
-previous block from the network, knowing that some other miner won that
-iteration of the lottery.  They immediately create a new candidate block
-with a commitment to the previous block, fill it with transactions, and start
-calculating the PoW for the candidate block. Each miner includes a
-special transaction in their candidate blocks, one that pays their own Bitcoin address
-the block reward plus the sum of
-transaction fees from all the transactions included in the candidate block. If they
-find a solution that makes the candidate into a valid block, they receive this reward
-after their successful block is added to the global blockchain and the
-reward transaction they included becomes spendable. Miners who participate in a mining pool have set up their
-software to create candidate blocks that assign the reward to a pool address.
-From there, a share of the reward is distributed to members of the pool
-miners in proportion to the amount of work they contributed.
+Alice的交易被網路接收並包含在未驗證交易池中。一旦被完整節點驗證，它就被包含在一個候選區塊中。在Alice的錢包首次傳輸交易大約五分鐘後，一個礦工找到了區塊的解決方案並向網路宣布。在每個其他礦工驗證獲勝區塊後，他們開始新的抽獎來生成下一個區塊。
 
-Alice's
-transaction was picked up by the network and included in the pool of
-unverified transactions. Once validated by a full node, it was
-included in a candidate block.
-Approximately five minutes after the transaction was first transmitted
-by Alice's wallet, a miner finds a solution for the
-block and announces it to the network. After each other miner
-validates the winning block, they start a new lottery to generate the next
-block.
+包含Alice交易的獲勝區塊成為了區塊鏈的一部分。包含Alice交易的區塊被計為該交易的((("confirmations")))((("clearing transactions")))((("transactions", "clearing")))一個_確認_。在包含Alice交易的區塊通過網路傳播後，創建一個包含Alice交易不同版本的替代區塊（例如不向Bob支付的交易）將需要執行與所有比特幣礦工創建全新區塊相同的工作量。當有多個替代區塊可供選擇時，比特幣完整節點選擇具有最多總PoW的有效區塊鏈，稱為_最佳區塊鏈_。為了讓整個網路接受替代區塊，需要在替代區塊之上挖出一個額外的新區塊。
 
-The winning block containing Alice's transaction became part of the
-blockchain. The block containing Alice's transaction is counted as ((("confirmations")))((("clearing transactions")))((("transactions", "clearing")))one
-_confirmation_ of that transaction.  After the block containing Alice's
-transaction has propagated through the network, creating an alternative
-block with a different version of Alice's transaction (such as a
-transaction that doesn't pay Bob) would require performing the same
-amount of work as it will take all Bitcoin miners to create an entirely
-new block.  When there are multiple alternative blocks to choose from,
-Bitcoin full nodes choose the chain of valid blocks with the most total
-PoW, called the _best blockchain_.  For the entire network to
-accept an alternative block, an additional new block would need to be
-mined on top of the alternative.
-
-That means miners have a choice.  They can work with Alice on an
-alternative to the transaction where she pays Bob, perhaps with
-Alice paying miners a share of the money she previously paid Bob.  This
-dishonest behavior will require they expend the effort required to
-create two new blocks.  Instead, miners who behave honestly can create a
-single new block and receive all of the fees from the transactions
-they include in it, plus the block subsidy.  Normally, the high cost of
-dishonestly creating two blocks for a small additional payment is much
-less profitable than honestly creating a new block, making it unlikely
-that a confirmed transaction will be deliberately changed.  For Bob, this
-means that he can begin to believe that the payment from Alice can be
-relied upon.
+這意味著礦工有選擇。他們可以與Alice合作創建一個替代交易，其中她向Bob支付，也許Alice向礦工支付她之前支付給Bob的部分資金。這種不誠實的行為將需要他們花費創建兩個新區塊所需的工作量。相反，誠實行事的礦工可以創建一個新區塊，並從他們包含在其中的所有交易中收取費用，加上區塊補貼。通常，不誠實地創建兩個區塊以獲得少量額外支付的高成本遠不如誠實地創建新區塊有利可圖，這使得已確認的交易不太可能被故意更改。對Bob來說，這意味著他可以開始相信Alice的支付可以信賴。
 
 [TIP]
 ====
-You can see the block that includes
-https://oreil.ly/7v_lH[Alice's transaction].
+你可以看到包含https://oreil.ly/7v_lH[Alice交易]的區塊。
 ====
 
-Approximately 19 minutes
-after the block containing Alice's transaction is broadcast, a new block
-is mined by another miner. Because this
-new block is built on top of the block that contained Alice's
-transaction (giving Alice's transaction two confirmations), Alice's
-transaction can now only be changed if two alternative blocks are
-mined--plus a new block built on top of them--for a total of three
-blocks that would need to be mined for Alice to take back the money she
-sent Bob.  Each block mined on top of the one containing Alice's
-transaction counts as an additional confirmation.  As the blocks pile on
-top of each other, it becomes harder to reverse the transaction, thereby
-giving Bob more and more confidence that Alice's payment is secure.
+在包含Alice交易的區塊廣播大約19分鐘後，另一個礦工挖出了一個新區塊。因為這個新區塊建立在包含Alice交易的區塊之上（給Alice的交易兩個確認），Alice的交易現在只能通過挖出兩個替代區塊--加上建立在它們之上的新區塊--來更改，總共需要挖出三個區塊才能讓Alice收回她發送給Bob的錢。建立在包含Alice交易的區塊之上的每個區塊都計為一個額外的確認。隨著區塊堆疊在彼此之上，逆轉交易變得越來越困難，從而給Bob越來越多的信心，相信Alice的支付是安全的。
 
-In <<block-alice1>>,  we can see the block that contains Alice's transaction. Below it are
-hundreds of thousands of blocks, linked to each other in a chain of
-blocks (blockchain) all the way back to block #0, known as((("genesis block"))) the _genesis
-block_. Over time, as the "height" of new blocks increases, so does the
-computation difficulty for the chain as a whole.
-By convention, any block with more than six confirmations
-is considered very hard to change, because it would require an immense amount of
-computation to recalculate six blocks (plus one new block). We will examine
-the process of mining and the way it builds confidence in more ((("mining", "operational overview", startref="mining-operational-overview")))detail in
-<<mining>>.
+在<<block-alice1>>中，我們可以看到包含Alice交易的區塊。在它下面有數十萬個區塊，通過區塊鏈（blockchain）相互連結，一直追溯到區塊#0，被稱為((("genesis block"))) _創世區塊_。隨著時間推移，隨著新區塊的"高度"增加，整個鏈的運算難度也隨之增加。按照慣例，任何具有超過六個確認的區塊都被認為很難更改，因為重新計算六個區塊（加上一個新區塊）需要巨大的運算量。我們將在<<mining>>中更詳細地檢視挖礦過程和它建立信任的方式。
 
 [[block-alice1]]
-.Alice's transaction included in a block.
+.包含Alice交易的區塊。
 image::images/mbc3_0207.png["Alice's transaction included in a block"]
 
 [role="less_space pagebreak-before"]
-=== Spending the Transaction
+=== 花費交易
 
-Now((("transactions", "spending bitcoins", id="transaction-spend2")))((("bitcoins", "spending", id="bitcoin-spend2")))((("spending bitcoins", id="spend-bitcoin2"))) that Alice's
-transaction has been embedded in the blockchain as part of a block, it
-is visible to all Bitcoin
-applications. Each Bitcoin full node can independently verify the
-transaction as valid and spendable. Full nodes validate every transfer
-of the funds from the moment the bitcoins were first generated in
-a block through each subsequent transaction until they reach
-Bob's address. Lightweight clients can partially verify payments
-by confirming that the
-transaction is in the blockchain and has several blocks mined after it,
-thus providing assurance that the miners expended significant effort
-committing to it (see <<spv_nodes>>).
+現在((("transactions", "spending bitcoins", id="transaction-spend2")))((("bitcoins", "spending", id="bitcoin-spend2")))((("spending bitcoins", id="spend-bitcoin2")))Alice的交易已經作為區塊的一部分嵌入到區塊鏈中，它對所有比特幣應用程式都是可見的。每個比特幣完整節點都可以獨立驗證交易是有效且可花費的。完整節點驗證從比特幣首次在區塊中生成到每個後續交易直到到達Bob地址的每筆資金轉移。輕量級客戶端可以通過確認交易在區塊鏈中且有幾個區塊在其之後被挖出來部分驗證支付，從而提供礦工為其投入大量工作的保證（見<<spv_nodes>>）。
 
-Bob can now spend the output from this and other transactions. For
-example, Bob can pay a contractor or supplier by transferring value from
-Alice's podcast payment to these new owners.
-As Bob spends the payments received from Alice and other customers, he
-extends the chain of transactions. Let's assume that Bob pays his web
-designer Gopesh
-for a new website page. Now the chain of transactions will
-look like <<block-alice2>>.
+Bob現在可以花費這個和其他交易的輸出。例如，Bob可以通過將Alice的播客支付價值轉移給這些新所有者來支付承包商或供應商。當Bob花費從Alice和其他客戶那裡收到的支付時，他擴展了交易鏈。讓我們假設Bob向他的網頁設計師Gopesh支付新網頁的費用。現在交易鏈看起來像<<block-alice2>>。
 
 [[block-alice2]]
-.Alice's transaction as part of a transaction chain from Joe to Gopesh.
+.Alice的交易作為從Joe到Gopesh的交易鏈的一部分。
 image::images/mbc3_0208.png["Alice's transaction as part of a transaction chain"]
 
-In this chapter, we saw how transactions build a chain that moves value
-from owner to owner. We also tracked Alice's transaction from the
-moment it was created in her wallet, through the Bitcoin network, and to
-the miners who recorded it on the blockchain. In the rest of this book,
-we will examine the specific technologies behind wallets, addresses,
-signatures, transactions, the network, and finally, mining.
+在本章中，我們看到了交易如何建立一個將價值從所有者轉移到所有者的鏈。我們還追蹤了Alice的交易從在她的錢包中創建的那一刻，通過比特幣網路，到礦工將其記錄在區塊鏈上的過程。在本書的其餘部分，我們將檢視錢包、地址、簽名、交易、網路，最後是挖礦背後的具體技術。

@@ -1,45 +1,20 @@
 [role="pagenumrestart"]
 [[ch01_intro_what_is_bitcoin]]
-== Introduction
+== 導論
 
-Bitcoin((("Bitcoin", "operational overview", id="bitcoin-operational-overview"))) is a collection of concepts and technologies that form the basis of a digital money ecosystem. Units of currency called bitcoin are used to store and transmit value among participants in the Bitcoin network. Bitcoin users communicate with each other using the Bitcoin protocol primarily via the internet, although other transport networks can also be used. The Bitcoin protocol stack, available as open source software, can be run on a wide range of computing devices, including laptops and smartphones, making the technology easily accessible.
+比特幣((("Bitcoin", "operational overview", id="bitcoin-operational-overview")))是一系列概念和技術的集合，形成了數位貨幣生態系統的基礎。在比特幣網路中，參與者使用名為「比特幣」的貨幣單位來儲存和傳遞價值。比特幣用戶主要通過網際網路使用比特幣協議相互通信，當然也可以使用其他傳輸網路。比特幣協議堆疊以開源軟體形式提供，可以在包括筆記型電腦和智慧型手機在內的各種運算設備上運行，使這項技術易於使用。
 
 [TIP]
 ====
-In this book, the ((("bitcoins", "defined")))unit of currency is called "bitcoin" with a small _b_,
-and the system is called "Bitcoin," with a capital _B_.
+在本書中，((("bitcoins", "defined")))貨幣單位稱為「比特幣」（bitcoin，小寫 _b_），
+而系統稱為「比特幣」（Bitcoin，大寫 _B_）。
 ====
 
-Users can transfer bitcoin over the network to do just about anything
-that can be done with conventional currencies, including buying and selling
-goods, sending money to people or organizations, or extending credit. Bitcoin
-can be purchased, sold, and exchanged for other currencies at
-specialized currency exchanges. Bitcoin is arguably the perfect form
-of money for the internet because it is fast, secure, and borderless.
+用戶可以通過網路轉移比特幣來完成幾乎所有傳統貨幣可以做的事情，包括買賣商品、向個人或組織匯款，或提供信貸。比特幣可以在專門的貨幣交易所購買、出售和兌換其他貨幣。比特幣可以說是網際網路最完美的貨幣形式，因為它快速、安全且無國界。
 
-Unlike traditional currencies, the bitcoin currency is entirely virtual. There are no
-physical coins or even individual digital coins. The coins are implied in
-transactions that transfer value from spender to receiver. Users of
-Bitcoin control keys that allow them to prove ownership of bitcoin in the
-Bitcoin network. With these keys, they can sign transactions to unlock
-the value and spend it by transferring it to a new owner. Keys are often
-stored in a digital wallet on each user’s computer or smartphone.
-Possession of the key that can sign a transaction is the only
-prerequisite to spending bitcoin, putting the control entirely in the
-hands of each user.
+與傳統貨幣不同，比特幣完全是虛擬的。沒有實體硬幣，甚至沒有個別的數位硬幣。這些「硬幣」是隱含在從支出者轉移到接收者的交易中。比特幣用戶控制著可以證明他們在比特幣網路中擁有比特幣所有權的密鑰。使用這些密鑰，他們可以簽署交易來解鎖價值，並通過轉移給新的所有者來使用它。密鑰通常儲存在每個用戶的電腦或智慧型手機上的數位錢包中。擁有可以簽署交易的密鑰是使用比特幣的唯一先決條件，這使控制權完全掌握在每個用戶手中。
 
-Bitcoin is a distributed, peer-to-peer system. As such, there is no
-central server or point of control. Units of bitcoin
-are created through a process((("bitcoins", "mining")))((("mining"))) called "mining," which involves repeatedly
-performing a computational task that references a list of recent Bitcoin
-transactions. Any participant in the Bitcoin network may operate as a
-miner, using their computing devices to help secure
-transactions. Every 10 minutes, on average, one Bitcoin miner can add security to
-past transactions and is rewarded with both brand new
-bitcoins and the fees paid by recent transactions. Essentially, Bitcoin
-mining decentralizes the currency-issuance
-and clearing functions of a central bank and replaces the need for any
-central bank.
+比特幣是一個分散式的點對點系統。因此，沒有中央伺服器或控制點。比特幣單位是通過一個稱為「挖礦」((("bitcoins", "mining")))((("mining")))的過程創建的，這個過程涉及重複執行一個參考最近比特幣交易列表的計算任務。比特幣網路中的任何參與者都可以作為礦工，使用他們的運算設備來幫助保護交易。平均每10分鐘，一個比特幣礦工可以為過去的交易增加安全性，並獲得全新的比特幣和最近交易支付的費用作為獎勵。本質上，比特幣挖礦將中央銀行的貨幣發行和清算功能去中心化，並取代了對中央銀行的需求。
 
 //-- Math for following paragraph --
 //total_btc = 0
@@ -49,244 +24,108 @@ central bank.
 //     print(i)
 //     break
 
-The Bitcoin protocol includes built-in algorithms that regulate the
-mining function across the network. The difficulty of the computational
-task that miners must perform is adjusted dynamically so that, on
-average, someone succeeds every 10 minutes regardless of how many miners
-(and how much processing) are competing at any moment. The protocol also
-periodically decreases the number of new bitcoins that are created,
-limiting the total number of bitcoins that will ever be created to a fixed total
-just below 21 million coins. The result is that the number of bitcoins in
-circulation closely follows an easily predictable curve where half of
-the remaining coins are added to circulation every four years.  At
-approximately block 1,411,200, which is expected to be produced around
-the year 2035, 99% of all bitcoins
-that will ever exist will have been issued.  Due to Bitcoin's
-diminishing rate of issuance, over the long term, the Bitcoin currency
-is deflationary.  Furthermore, nobody can force you to accept
-any bitcoins that were created beyond the
-expected issuance rate.
+比特幣協議包含內建的演算法來調節整個網路的挖礦功能。礦工必須執行的計算任務難度會動態調整，使得平均每10分鐘就會有人成功，無論在任何時刻有多少礦工（以及多少運算能力）在競爭。該協議還會定期減少新創建的比特幣數量，將總數限制在略低於2100萬個比特幣。結果是，流通中的比特幣數量緊密遵循一個容易預測的曲線，每四年剩餘比特幣的一半會被加入流通。在大約第1,411,200個區塊（預計在2035年左右產生）時，所有將存在的比特幣中的99%都將被發行。由於比特幣發行率的遞減，從長期來看，比特幣貨幣是通縮的。此外，沒有人可以強迫你接受超出預期發行率的比特幣。
 
-Behind the scenes, Bitcoin is also the name of the protocol, a peer-to-peer network, and a distributed computing innovation. Bitcoin builds on decades of research in cryptography and distributed systems and includes at least four key innovations brought together in a unique and powerful combination. Bitcoin consists of:
+在背後，比特幣也是協議的名稱、點對點網路和分散式運算創新。比特幣建立在數十年的密碼學和分散式系統研究基礎上，並至少包含了四個以獨特且強大的組合方式結合在一起的關鍵創新。比特幣由以下組成：
 
-* A decentralized peer-to-peer network (the Bitcoin protocol)
-* A public transaction journal (the blockchain)
-* A set of rules for independent transaction validation and currency issuance (consensus rules)
-* A mechanism for reaching global decentralized consensus on the valid blockchain (proof-of-work algorithm)
+* 去中心化的點對點網路（比特幣協議）
+* 公開的交易日誌（區塊鏈）
+* 一套用於獨立交易驗證和貨幣發行的規則（共識規則）
+* 一種在有效區塊鏈上達成全球去中心化共識的機制（工作量證明演算法）
 
-As a developer, I see Bitcoin as akin to the internet of money, a network for propagating value and securing the ownership of digital assets via distributed computation. There's a lot more to Bitcoin than first meets ((("Bitcoin", "operational overview", startref="bitcoin-operational-overview")))the eye.
+作為一名開發者，我將比特幣視為類似於貨幣的網際網路，一個通過分散式運算來傳播價值和保護數位資產所有權的網路。比特幣遠比表面看起來要複雜得多((("Bitcoin", "operational overview", startref="bitcoin-operational-overview")))。
 
-In this chapter we'll get started by explaining some of the main concepts and terms, getting the necessary software, and using Bitcoin for simple transactions. In the following chapters, we'll start unwrapping the layers of technology that make Bitcoin possible and examine the inner workings of the Bitcoin network and protocol.
+在本章中，我們將通過解釋一些主要概念和術語、獲取必要的軟體，以及使用比特幣進行簡單交易來開始。在接下來的章節中，我們將開始揭開使比特幣成為可能的技術層面，並檢視比特幣網路和協議的內部運作。
 
-.Digital Currencies Before Bitcoin
+.比特幣之前的數位貨幣
 ****
 
-The ((("digital currencies, history of")))((("history", "of digital currencies", secondary-sortas="digital currencies")))((("cryptography")))emergence of viable digital money is closely linked to developments in cryptography. This is not surprising when one considers the fundamental challenges involved with using bits to represent value that can be exchanged for goods and services. Three basic questions for anyone accepting digital money are:
+((("digital currencies, history of")))((("history", "of digital currencies", secondary-sortas="digital currencies")))((("cryptography")))可行的數位貨幣的出現與密碼學的發展密切相關。當考慮到使用位元來代表可以用於交換商品和服務的價值所涉及的基本挑戰時，這並不令人驚訝。對於任何接受數位貨幣的人來說，有三個基本問題：
 
-*     Can I trust that the money is authentic and not counterfeit?
-*     Can I trust that the digital money can only be spent once (known as the “double-spend” problem)?
-*     Can I be sure that no one else can claim this money belongs to them and not me?
+* 我能相信這筆錢是真實的而不是偽造的嗎？
+* 我能相信這筆數位貨幣只能被使用一次（即所謂的「雙重支付」問題）嗎？
+* 我能確定沒有其他人可以聲稱這筆錢屬於他們而不是我嗎？
 
-Issuers of paper money are constantly battling the counterfeiting problem by using increasingly sophisticated papers and printing technology.  Physical money addresses the double-spend issue easily because the same paper note cannot be in two places at once. Of course, conventional money is also often stored and transmitted digitally. In these cases, the counterfeiting and double-spend issues are handled by clearing all electronic transactions through central authorities that have a global view of the currency in circulation. For digital money, which cannot take advantage of esoteric inks or holographic strips, cryptography provides the basis for trusting the legitimacy of a user’s claim to value.  Specifically, cryptographic digital signatures enable a user to sign a digital asset or transaction proving the ownership of that asset. With the appropriate architecture, digital signatures also can be used to address the double-spend issue.
+紙幣發行者通過使用越來越複雜的紙張和印刷技術來不斷對抗偽造問題。實體貨幣很容易解決雙重支付問題，因為同一張紙幣不可能同時出現在兩個地方。當然，傳統貨幣也經常以數位方式儲存和傳輸。在這些情況下，偽造和雙重支付問題是通過將所有電子交易清算給擁有全球流通貨幣視圖的中央機構來處理的。對於無法利用特殊墨水或全息條的數位貨幣來說，密碼學提供了信任用戶對價值主張合法性的基礎。具體來說，密碼學數位簽名使用戶能夠簽署數位資產或交易，證明該資產的所有權。通過適當的架構，數位簽名也可以用來解決雙重支付問題。
 
-When cryptography started becoming more broadly available and understood in the late 1980s, many researchers began trying to use cryptography to build digital currencies. These early digital currency projects issued digital money, usually backed by a national currency or precious metal such as gold.
+當密碼學在1980年代末開始變得更加廣泛可用和為人所理解時，許多研究人員開始嘗試使用密碼學來建立數位貨幣。這些早期的數位貨幣項目發行數位貨幣，通常由國家貨幣或黃金等貴金屬支持。
 
-Although these earlier digital currencies worked, they were centralized and, as a result, were easy to attack by governments and hackers. Early digital currencies used a central clearinghouse to settle all transactions at regular intervals, just like a traditional banking system. Unfortunately, in most cases these nascent digital currencies were targeted by worried governments and eventually litigated out of existence. Some failed in spectacular crashes when the parent company liquidated abruptly. To be robust against intervention by antagonists, whether legitimate governments or criminal elements, a _decentralized_ digital currency was needed to avoid a single point of attack. Bitcoin is such a system, decentralized by design, and free of any central authority or point of control that can be attacked or corrupted.
+儘管這些早期的數位貨幣運作良好，但它們是中心化的，因此容易受到政府和駭客的攻擊。早期的數位貨幣使用中央清算所定期結算所有交易，就像傳統銀行系統一樣。不幸的是，在大多數情況下，這些新生的數位貨幣被擔憂的政府盯上，最終被訴訟出局。有些在母公司突然清算時以驚人的崩潰告終。為了能夠對抗對手（無論是合法政府還是犯罪份子）的干預，需要一個_去中心化_的數位貨幣來避免單點攻擊。比特幣就是這樣一個系統，從設計上就是去中心化的，沒有可以被攻擊或腐化的中央權威或控制點。
 
 ****
 
-=== History of Bitcoin
+=== 比特幣的歷史
 
-Bitcoin was((("Bitcoin", "history of")))((("history", "of Bitcoin", secondary-sortas="Bitcoin")))((("Nakamoto, Satoshi"))) first described in 2008 with the publication of a
-paper titled "Bitcoin: A Peer-to-Peer Electronic Cash
-System,"footnote:[https://oreil.ly/KUaBM["Bitcoin: A Peer-to-Peer Electronic Cash System"],
-Satoshi Nakamoto.] written under the
-alias of Satoshi Nakamoto (see <<satoshi_whitepaper>>). Nakamoto
-combined several prior inventions such as digital signatures and Hashcash to create
-a completely decentralized electronic cash system that does not rely on
-a central authority for currency issuance or settlement and validation
-of transactions. A key innovation was to use a distributed computation
-system (called a "proof-of-work" algorithm) to conduct a global
-lottery every 10 minutes on average, allowing the decentralized network to
-arrive at _consensus_ about the state of transactions. This
-elegantly solves the issue of double-spend where a single currency unit
-can be spent twice. Previously, the double-spend problem was a weakness
-of digital currency and was addressed by clearing all transactions
-through a central clearinghouse.
+比特幣((("Bitcoin", "history of")))((("history", "of Bitcoin", secondary-sortas="Bitcoin")))((("Nakamoto, Satoshi")))首次在2008年以一篇題為「比特幣：點對點電子現金系統」的論文被描述，footnote:[https://oreil.ly/KUaBM["Bitcoin: A Peer-to-Peer Electronic Cash System"],
+Satoshi Nakamoto.]這篇論文是以中本聰（Satoshi Nakamoto）的化名發表的（見<<satoshi_whitepaper>>）。中本聰結合了數位簽名和Hashcash等幾項先前發明，創建了一個完全去中心化的電子現金系統，不依賴中央權威來發行貨幣或結算和驗證交易。一個關鍵創新是使用分散式運算系統（稱為「工作量證明」演算法）平均每10分鐘進行一次全球抽獎，使去中心化網路能夠就交易狀態達成_共識_。這優雅地解決了單個貨幣單位可能被使用兩次的雙重支付問題。在此之前，雙重支付問題是數位貨幣的弱點，是通過中央清算所清算所有交易來解決的。
 
-The Bitcoin network started in 2009, based on a reference implementation
-published by Nakamoto and since revised by many other programmers. The
-number and power of machines running the((("proof-of-work algorithm", seealso="mining"))) proof-of-work algorithm
-(mining) that provides security and resilience for Bitcoin have
-increased exponentially, and their combined computational power now
-exceeds the combined number of computing operations of the
-world's top supercomputers.
+比特幣網路始於2009年，基於中本聰發布並隨後被許多其他程式設計師修訂的參考實現。運行((("proof-of-work algorithm", seealso="mining")))工作量證明演算法（挖礦）的機器數量和能力呈指數增長，這些機器為比特幣提供安全性和韌性，它們的總運算能力現在超過了世界頂級超級電腦的總運算操作數。
 
+中本聰在2011年4月退出公眾視野，將程式碼和網路的開發責任交給了一個蓬勃發展的志願者群體。比特幣背後的人或人們的身份仍然未知。然而，無論是中本聰還是其他任何人都沒有對比特幣系統施加個人控制，該系統基於完全透明的數學原理、開源程式碼和參與者之間的共識運作。這項發明本身具有開創性，已經在分散式運算、經濟學和計量經濟學領域產生了新的科學。
 
-Satoshi Nakamoto withdrew from the public in April 2011, leaving the responsibility of developing the code and network to a thriving group of volunteers. The identity of the person or people behind Bitcoin is still unknown. However, neither Satoshi Nakamoto nor anyone else exerts individual control over the Bitcoin system, which operates based on fully transparent mathematical principles, open source code, and consensus among participants. The invention itself is groundbreaking and has already spawned new science in the fields of distributed computing, economics, and econometrics.
-
-.A Solution to a Distributed Computing Problem
+.分散式運算問題的解決方案
 ****
-Satoshi Nakamoto's invention ((("Byzantine Generals&#x27; Problem")))((("distributed computing problem")))is
-also a practical and novel solution to a problem in distributed
-computing, known as the "Byzantine Generals' Problem." Briefly, the
-problem consists of trying to get multiple participants without a leader
-to agree on a course of action by exchanging information over an
-unreliable and potentially compromised network. Satoshi Nakamoto's solution, which uses the concept of
-proof of work to achieve consensus _without a central trusted
-authority_, represents a breakthrough in distributed computing.
+中本聰的發明((("Byzantine Generals&#x27; Problem")))((("distributed computing problem")))也是分散式運算中一個稱為「拜占庭將軍問題」的實用且新穎的解決方案。簡而言之，這個問題包括嘗試讓多個沒有領導者的參與者通過在不可靠且可能被破壞的網路上交換資訊來就行動方案達成一致。中本聰的解決方案使用工作量證明的概念來_在沒有中央可信權威的情況下_達成共識，代表了分散式運算的突破。
 ****
 
-=== Getting Started
+=== 開始使用
 
-Bitcoin is((("Bitcoin", "wallets", see="wallets")))((("wallets", "explained"))) a protocol that can be accessed using an
-application that speaks the protocol. A "Bitcoin wallet" is the
-most common user interface to the Bitcoin system, just like a web
-browser is the most common user interface for the HTTP protocol. There
-are many implementations and brands of Bitcoin wallets, just like there
-are many brands of web browsers (e.g., Chrome, Safari, and Firefox).
-And just like we all have our favorite browsers,
-Bitcoin wallets vary in quality, performance, security, privacy, and
-reliability. There is also a reference implementation of the Bitcoin
-protocol that includes a wallet, known as "Bitcoin Core," which is
-derived from the original implementation written by Satoshi Nakamoto.
+比特幣是((("Bitcoin", "wallets", see="wallets")))((("wallets", "explained")))一個可以通過使用該協議的應用程式來存取的協議。「比特幣錢包」是比特幣系統最常見的用戶介面，就像網頁瀏覽器是HTTP協議最常見的用戶介面一樣。有許多比特幣錢包的實現和品牌，就像有許多網頁瀏覽器品牌（例如Chrome、Safari和Firefox）一樣。就像我們都有自己的最愛瀏覽器一樣，比特幣錢包在品質、性能、安全性、隱私性和可靠性方面各不相同。還有一個包含錢包的比特幣協議參考實現，稱為「Bitcoin Core」，它源自中本聰編寫的原始實現。
 
-==== Choosing a Bitcoin Wallet
+==== 選擇比特幣錢包
 
-Bitcoin wallets ((("wallets", "choosing")))((("selecting", "wallets")))((("choosing", see="selecting")))are one of the most actively developed applications in the Bitcoin ecosystem. There is intense competition, and while a new wallet is probably being developed right now, several wallets from last year are no longer actively maintained. Many wallets focus on specific platforms or specific uses and some are more suitable for beginners while others are filled with features for advanced users. Choosing a wallet is highly subjective and depends on the use and user expertise. Therefore, it would be pointless to recommend a specific brand or wallet. However, we can categorize Bitcoin wallets according to their platform and function and provide some clarity about all the different types of wallets that exist. It is worth trying out several different wallets until you find one that fits your needs.
+比特幣錢包((("wallets", "choosing")))((("selecting", "wallets")))((("choosing", see="selecting")))是比特幣生態系統中最積極開發的應用程式之一。競爭非常激烈，雖然新的錢包可能正在開發中，但去年的一些錢包已經不再積極維護。許多錢包專注於特定平台或特定用途，有些更適合初學者，而另一些則充滿了進階用戶的功能。選擇錢包高度主觀，取決於使用方式和用戶專業知識。因此，推薦特定品牌或錢包是沒有意義的。然而，我們可以根據平台和功能對比特幣錢包進行分類，並提供關於所有不同類型錢包的清晰說明。值得嘗試幾個不同的錢包，直到找到一個適合你需求的。
 
-===== Types of Bitcoin wallets
-Bitcoin wallets ((("wallets", "types of", id="wallet-type")))can be categorized as follows, according to the platform:
+===== 比特幣錢包的類型
+比特幣錢包((("wallets", "types of", id="wallet-type")))可以根據平台分類如下：
 
-Desktop wallet:: A ((("desktop wallets")))desktop wallet was the first type of Bitcoin wallet created as a reference implementation. Many users run desktop wallets for the features, autonomy, and control they offer. Running on general-use operating systems such as Windows and macOS has certain security disadvantages, however, as these platforms are often insecure and poorly configured.
+桌面錢包:: ((("desktop wallets")))桌面錢包是作為參考實現創建的第一種比特幣錢包。許多用戶運行桌面錢包是為了其功能、自主性和控制權。在Windows和macOS等通用作業系統上運行有某些安全劣勢，因為這些平台通常不安全且配置不當。
 
-Mobile wallet:: A ((("mobile wallets")))mobile wallet is the most common type of Bitcoin
-wallet. Running on smart-phone operating systems such as Apple iOS and
-Android, these wallets are often a great choice for new users. Many are
-designed for simplicity and ease-of-use, but there are also fully
-featured mobile wallets for power users.  To avoid downloading and
-storing large amounts of data, most mobile wallets retrieve information
-from remote servers, reducing your privacy by disclosing to third
-parties information about your Bitcoin addresses and balances.
+行動錢包:: ((("mobile wallets")))行動錢包是最常見的比特幣錢包類型。在Apple iOS和Android等智慧型手機作業系統上運行，這些錢包通常是新用戶的絕佳選擇。許多錢包設計簡單易用，但也有為進階用戶提供的功能完整的行動錢包。為了避免下載和儲存大量數據，大多數行動錢包從遠端伺服器獲取資訊，這會通過向第三方披露你的比特幣地址和餘額資訊來降低你的隱私。
 
-Web wallet:: Web wallets ((("web wallets")))are accessed through a web browser and store
-the user's wallet on a server owned by a third party. This is similar to
-webmail in that it relies entirely on a third-party server. Some of
-these services operate using client-side code running in the user's
-browser, which keeps control of the Bitcoin keys in the hands of the
-user, although the user's dependence on the server still compromises
-their privacy. Most, however, take control of the Bitcoin keys from
-users in exchange for ease-of-use. It is inadvisable
-to store large amounts of bitcoin on third-party systems.
+網頁錢包:: 網頁錢包((("web wallets")))通過網頁瀏覽器存取，並將用戶的錢包儲存在第三方擁有的伺服器上。這類似於網頁郵件，完全依賴第三方伺服器。其中一些服務使用在用戶瀏覽器中運行的客戶端程式碼運作，這將比特幣密鑰的控制權保持在用戶手中，儘管用戶對伺服器的依賴仍然損害了他們的隱私。然而，大多數服務以易用性為代價從用戶手中奪取比特幣密鑰的控制權。不建議在第三方系統上儲存大量比特幣。
 
-Hardware signing devices:: Hardware signing devices((("hardware signing devices"))) are devices that can
-store keys and sign transactions using special-purpose hardware and
-firmware. They usually
-connect to a desktop, mobile, or web wallet via USB cable,
-near-field-communication (NFC), or a camera with QR codes.  By handling
-all Bitcoin-related operations on the specialized hardware, these
-wallets are less vulnerable to many types of attacks.  Hardware signing
-devices are sometimes called "hardware wallets", but they need to be
-paired with a full-featured wallet to send and receive transactions, and
-the security and privacy offered by that paired wallet plays a critical
-role in how much security and privacy the user obtains when using the
-hardware signing device.
+硬體簽名設備:: 硬體簽名設備((("hardware signing devices")))是可以使用特殊用途硬體和韌體來儲存密鑰和簽署交易的設備。它們通常通過USB電纜、近場通訊（NFC）或帶有QR碼的攝影機連接到桌面、行動或網頁錢包。通過在專門的硬體上處理所有比特幣相關操作，這些錢包不易受到許多類型的攻擊。硬體簽名設備有時被稱為「硬體錢包」，但它們需要與功能完整的錢包配對才能發送和接收交易，而配對錢包提供的安全性和隱私性在用戶使用硬體簽名設備時獲得的安全性和隱私性方面起著關鍵作用。
 
-===== Full node versus Lightweight
-Another way to categorize Bitcoin wallets is by their degree of autonomy and how they interact with the Bitcoin network:
+===== 完整節點與輕量級
+另一種對比特幣錢包進行分類的方式是根據它們的自主程度和與比特幣網路互動的方式：
 
-Full node:: A full node ((("full nodes")))is a program that validates the
-entire history of Bitcoin transactions (every transaction by every user, ever).  Optionally, full nodes can also store previously validated
-transactions and serve data to other Bitcoin programs, either on the
-same computer or over the internet.  A full node uses substantial
-computer resources--about the same as watching an hour-long streaming
-video for each day of Bitcoin transactions--but the full node offers
-complete autonomy to its users.
+完整節點:: 完整節點((("full nodes")))是一個驗證整個比特幣交易歷史的程式（每個用戶的每筆交易）。可選地，完整節點也可以儲存先前驗證的交易，並向同一電腦上或通過網際網路的其他比特幣程式提供數據。完整節點使用大量電腦資源--大約相當於觀看一個小時的串流影片，用於處理每天的比特幣交易--但完整節點為其用戶提供完全自主權。
 
-Lightweight client:: 
-A lightweight client,((("lightweight clients")))((("simplified-payment-verification (SPV) clients")))((("SPV (simplified-payment-verification) clients"))) also known as a simplified-payment-verification (SPV) client,
-connects to a full node or other remote server for receiving and sending
-Bitcoin transaction information, but stores the user wallet locally,
-partially validates the transactions it receives, and independently
-creates outgoing transactions.
+輕量級客戶端:: 
+輕量級客戶端((("lightweight clients")))((("simplified-payment-verification (SPV) clients")))((("SPV (simplified-payment-verification) clients")))，也稱為簡化支付驗證（SPV）客戶端，連接到完整節點或其他遠端伺服器以接收和發送比特幣交易資訊，但在本地儲存用戶錢包，部分驗證接收到的交易，並獨立創建外發交易。
 
-Third-party API client:: A third-party
-API client ((("third-party API clients")))is one that interacts with Bitcoin through a third-party
-system of APIs rather than by
-connecting to the Bitcoin network directly. The wallet may be stored by
-the user or by third-party servers, but the client trusts the remote
-server to provide it with accurate information and protect its ((("wallets", "types of", startref="wallet-type")))privacy.
+第三方API客戶端:: 第三方API客戶端((("third-party API clients")))是通過第三方API系統而不是直接連接到比特幣網路來與比特幣互動的客戶端。錢包可能由用戶或第三方伺服器儲存，但客戶端信任遠端伺服器提供準確的資訊並保護其((("wallets", "types of", startref="wallet-type")))隱私。
 
 [TIP]
 ====
-Bitcoin ((("Bitcoin", "as peer-to-peer network", secondary-sortas="peer-to-peer network")))((("peer-to-peer networks, Bitcoin as")))((("peers")))((("clients")))is a peer-to-peer (P2P) network.  Full nodes are the _peers:_
-each peer individually validates every confirmed transaction and can
-provide data to its user with complete authority.  Lightweight wallets
-and other software are _clients:_ each client depends on one or more peers
-to provide it with valid data.  Bitcoin clients can perform secondary
-validation on some of the data they receive and make connections to
-multiple peers to reduce their dependence on the integrity of a single
-peer, but the security of a client ultimately relies on the integrity of
-its peers.
+比特幣((("Bitcoin", "as peer-to-peer network", secondary-sortas="peer-to-peer network")))((("peer-to-peer networks, Bitcoin as")))((("peers")))((("clients")))是一個點對點（P2P）網路。完整節點是_對等節點：_每個對等節點獨立驗證每個已確認的交易，並可以完全自主地為其用戶提供數據。輕量級錢包和其他軟體是_客戶端：_每個客戶端依賴一個或多個對等節點為其提供有效數據。比特幣客戶端可以對接收到的部分數據進行二次驗證，並連接到多個對等節點以減少對單個對等節點完整性的依賴，但客戶端的安全性最終依賴於其對等節點的完整性。
 ====
 
-===== Who controls the keys
+===== 誰控制密鑰
 
-A very((("wallets", "key control")))((("keys, control of")))((("bitcoins", "key control"))) important additional consideration is _who controls the keys_. As
-we will see in subsequent chapters, access to bitcoins is
-controlled by "private keys," which are like very long PINs. If
-you are the only one to have control over these private
-keys, you are in control of your bitcoins. Conversely, if you do not have
-control, then your bitcoins are managed by a third-party who
-ultimately controls your funds on your behalf. Key management software falls into two
-important categories based on control: _wallets_, where you
-control the keys, and the funds and accounts with custodians where some
-third-party controls the keys. To emphasize this point, I (Andreas)
-coined the phrase: _Your keys, your coins. Not your keys, not your coins_.
+一個非常((("wallets", "key control")))((("keys, control of")))((("bitcoins", "key control")))重要的額外考慮因素是_誰控制密鑰_。正如我們將在後續章節中看到的，對比特幣的存取是由「私鑰」控制的，這些私鑰就像很長的PIN碼。如果你是完全控制這些私鑰的唯一人，你就控制著你的比特幣。相反，如果你沒有控制權，那麼你的比特幣是由第三方管理的，他們最終代表你控制你的資金。密鑰管理軟體根據控制權分為兩個重要類別：_錢包_，你控制密鑰，以及託管人的資金和帳戶，其中某些第三方控制密鑰。為了強調這一點，我（Andreas）創造了這句話：_你的密鑰，你的幣。不是你的密鑰，不是你的幣_。
 
-Combining these categorizations, many Bitcoin wallets fall into a few
-groups, with the three most common being desktop full node
-(you control the keys), mobile lightweight wallet (you control the keys), and web-based
-accounts with third parties (you don't control the keys). The lines between different categories
-are sometimes blurry, as software runs on multiple platforms and can
-interact with the network in different ways.
+結合這些分類，許多比特幣錢包分為幾類，最常見的三類是桌面完整節點（你控制密鑰）、行動輕量級錢包（你控制密鑰）和基於網頁的第三方帳戶（你不控制密鑰）。不同類別之間的界限有時很模糊，因為軟體可以在多個平台上運行，並可以以不同方式與網路互動。
 
-==== Quick Start
+==== 快速開始
 
-Alice is not a
-technical user and only recently heard about Bitcoin from her friend
-Joe. While at a party, Joe is enthusiastically explaining
-Bitcoin to everyone around him and is offering a demonstration. Intrigued,
-Alice asks how she can get started with Bitcoin. Joe says that a mobile
-wallet is best for new users and he recommends a few of his favorite
-wallets. Alice downloads one of Joe's recommendations
-and installs it on her phone.
+Alice不是技術用戶，最近才從她的朋友Joe那裡聽說比特幣。在一次派對上，Joe熱情地向周圍的人解釋比特幣，並提供示範。Alice對此感興趣，詢問如何開始使用比特幣。Joe說行動錢包最適合新用戶，並推薦了一些他喜歡的錢包。Alice下載了Joe推薦的一個錢包並安裝在她的手機上。
 
-When Alice runs her wallet application for the first time, she chooses
-the option to create a new Bitcoin wallet. Because the wallet she has
-chosen is a ((("wallets", "noncustodial")))((("noncustodial wallets")))noncustodial wallet, Alice (and only Alice) will be in
-control of her keys. Therefore, she bears responsibility for backing
-them up, since losing the keys means she loses access to her bitcoins. To
-facilitate this, her wallet produces a _recovery code_ that can be used
-to restore her wallet.
+當Alice第一次運行她的錢包應用程式時，她選擇創建新的比特幣錢包的選項。因為她選擇的錢包是((("wallets", "noncustodial")))((("noncustodial wallets")))非託管錢包，Alice（只有Alice）將控制她的密鑰。因此，她有責任備份它們，因為失去密鑰意味著她將失去對比特幣的存取權。為了促進這一點，她的錢包產生了一個_恢復碼_，可以用來恢復她的錢包。
 
 [[recovery_code_intro]]
-==== Recovery Codes
+==== 恢復碼
 
-Most ((("wallets", "recovery codes", id="wallet-recovery")))((("recovery codes", id="recovery-code")))((("backing up", "recovery codes", see="recovery codes")))modern noncustodial Bitcoin wallets will provide a recovery
-code for their user
-to back up.  The recovery code usually consists of numbers, letters, or words
-selected randomly by the software, and is used as the basis for the keys
-that are generated by the wallet. See <<recovery_code_sample>> for
-examples.
+大多數((("wallets", "recovery codes", id="wallet-recovery")))((("recovery codes", id="recovery-code")))((("backing up", "recovery codes", see="recovery codes")))現代非託管比特幣錢包都會為其用戶提供恢復碼。恢復碼通常由軟體隨機選擇的數字、字母或單字組成，用作錢包生成的密鑰的基礎。見<<recovery_code_sample>>以獲取範例。
 
 ++++
 <table id="recovery_code_sample">
-<caption>Sample recovery codes</caption>
+<caption>恢復碼範例</caption>
 <thead>
 <tr>
-<th>Wallet</th>
-<th>Recovery code</th>
+<th>錢包</th>
+<th>恢復碼</th>
 </tr>
 </thead>
 <tbody>
@@ -308,198 +147,104 @@ examples.
 
 [TIP]
 ====
-A recovery code is ((("mnemonic phrases", see="recovery codes")))((("seed phrases", see="recovery codes")))sometimes called a "mnemonic" or "mnemonic phrase,"
-which implies you should memorize the phrase, but writing the phrase
-down on paper takes less work and tends to be more reliable than most
-people's memories.  Another alternative name is "seed phrase" because
-it provides the input ("seed") to the function that generates all of
-a wallet's keys.
+恢復碼((("mnemonic phrases", see="recovery codes")))((("seed phrases", see="recovery codes")))有時被稱為「助記詞」或「助記短語」，這暗示你應該記住這個短語，但在紙上寫下這個短語比大多數人的記憶更可靠，也更不費力。另一個替代名稱是「種子短語」，因為它提供了生成錢包所有密鑰的函數的輸入（「種子」）。
 ====
 
-If something happens to Alice's wallet, she can download a new copy of
-her wallet software and enter this recovery code to rebuild the wallet
-database of all the onchain transactions she's ever sent or received.
-However, recovering from the recovery code will not by itself restore any additional
-data Alice entered into her wallet, such as the labels she associated
-with particular addresses or transactions.  Although losing access to
-that metadata isn't as important as losing access to money, it can
-still be important in its own way.  Imagine you need to review an old
-bank or credit card statement and the name of every entity you paid (or
-who paid you) has been blanked out.  To prevent losing metadata, many
-wallets provide an additional backup feature beyond recovery codes.
+如果Alice的錢包發生問題，她可以下載她的錢包軟體的新副本，並輸入這個恢復碼來重建她曾經發送或接收的所有鏈上交易的錢包數據庫。但是，從恢復碼恢復不會自動恢復Alice在錢包中輸入的任何額外數據，例如她與特定地址或交易關聯的標籤。雖然失去對該元數據的存取權不如失去對金錢的存取權重要，但它本身仍然可能很重要。想像你需要查看舊的銀行或信用卡對帳單，而你支付（或支付給你）的每個實體的名稱都被塗掉了。為了防止失去元數據，許多錢包提供了除恢復碼之外的額外備份功能。
 
-For some wallets, that additional backup feature is even more important
-today than it used to be.  Many Bitcoin payments ((("offchain technology")))are now made using
-_offchain_ technology, where not every payment is stored in the public blockchain.  This reduces user's costs and improves privacy, among other
-benefits, but it means that a mechanism like recovery codes that depends on
-onchain data can't guarantee recovery of all of a user's bitcoins.  For
-applications with offchain support, it's important to make frequent
-backups of the wallet database.
+對於某些錢包來說，這個額外的備份功能現在比過去更重要。許多比特幣支付((("offchain technology")))現在使用_鏈下_技術，不是每筆支付都儲存在公共區塊鏈中。這降低了用戶的成本並提高了隱私性，但這意味著依賴鏈上數據的機制（如恢復碼）無法保證恢復用戶的所有比特幣。對於具有鏈下支援的應用程式，重要的是經常備份錢包數據庫。
 
-Of note, when receiving funds to a new mobile wallet for the first time,
-many wallets will often re-verify that you have securely backed-up your
-recovery code. This can range from a simple prompt to requiring the
-user to manually re-enter the code.
+值得注意的是，當第一次向新的行動錢包接收資金時，許多錢包通常會重新驗證你是否安全地備份了你的恢復碼。這可能從簡單的提示到要求用戶手動重新輸入代碼不等。
 
 [WARNING]
 ====
-Although many legitimate wallets will prompt you to re-enter
-your recovery code, there are also many malware applications that mimic the
-design of a wallet, insist you enter your recovery code, and then
-relay any entered code to the malware developer so they can steal
-your funds.  This is the equivalent of phishing websites that try to
-trick you into giving them your bank passphrase.  For most wallet
-applications, the only times they will ask for your recovery code are during
-the initial set up (before you have received any bitcoins) and during
-recovery (after you lost access to your original wallet).  If the application
-asks for your recovery code any other time, consult with an expert to
-ensure you aren't ((("wallets", "recovery codes", startref="wallet-recovery")))((("recovery codes", startref="recovery-code")))being phished.
+儘管許多合法的錢包會提示你重新輸入恢復碼，但也有許多惡意軟體應用程式模仿錢包的設計，堅持要你輸入恢復碼，然後將輸入的代碼轉發給惡意軟體開發者，以便他們竊取你的資金。這相當於試圖欺騙你提供銀行密碼的釣魚網站。對於大多數錢包應用程式來說，它們只會在初始設置期間（在你收到任何比特幣之前）和恢復期間（在你失去對原始錢包的存取權之後）要求你的恢復碼。如果應用程式在其他時候要求你的恢復碼，請諮詢專家以確保你不是((("wallets", "recovery codes", startref="wallet-recovery")))((("recovery codes", startref="recovery-code")))被釣魚。
 ====
 
-==== Bitcoin Addresses
+==== 比特幣地址
 
-Alice is ((("addresses", "explained")))now ready to start using her new Bitcoin wallet.  Her wallet application randomly generated a private key (described in more detail in <<private_keys>>) that will be used to derive Bitcoin addresses that direct to her wallet. At this point, her Bitcoin addresses are not known to the Bitcoin network or "registered" with any part of the Bitcoin system. Her Bitcoin addresses are simply numbers that correspond to her private key that she can use to control access to the funds. The addresses are generated independently by her wallet without reference or registration with any service.
+Alice((("addresses", "explained")))現在準備開始使用她的新比特幣錢包。她的錢包應用程式隨機生成了一個私鑰（在<<private_keys>>中詳細描述），將用於推導指向她錢包的比特幣地址。此時，她的比特幣地址對比特幣網路或比特幣系統的任何部分來說都是未知的或「註冊」的。她的比特幣地址只是對應於她的私鑰的數字，她可以用來控制對資金的存取。這些地址是由她的錢包獨立生成的，沒有參考或註冊任何服務。
 
 [TIP]
 ====
-There
-are a variety ((("invoices")))of Bitcoin addresses and invoice formats.  Addresses and
-invoices can be shared with other Bitcoin users
-who can use them to send bitcoins directly to your wallet.  You can share
-an address or invoice with other people without worrying about the
-security of your bitcoins.  Unlike a bank account number, nobody who
-learns one of your Bitcoin addresses can withdraw money from your wallet--you
-must initiate all spends.  However, if you give two people the same
-address, they will be able to see how many bitcoins the other person sent
-you.  If you post your address publicly, everyone will be able to see
-how much bitcoin other people sent to that address.  To protect your privacy, you
-should generate a new invoice with a new address each time you request a
-payment.
+有((("invoices")))各種比特幣地址和發票格式。地址和發票可以與其他比特幣用戶共享，他們可以使用這些地址和發票直接向你的錢包發送比特幣。你可以與其他人共享地址或發票，而不必擔心比特幣的安全性。與銀行帳號不同，知道你的比特幣地址的人無法從你的錢包中提取資金--你必須發起所有支出。但是，如果你給兩個人相同的地址，他們將能夠看到對方發送給你多少比特幣。如果你公開張貼你的地址，每個人都將能夠看到其他人向該地址發送了多少比特幣。為了保護你的隱私，你應該在每次請求支付時生成一個新的發票和新的地址。
 ====
 
-==== Receiving Bitcoin
+==== 接收比特幣
 
-Alice((("bitcoins", "receiving")))((("receiving bitcoins"))) uses the _Receive_ button, which displays a QR code, shown in <<wallet_receive>>.
+Alice((("bitcoins", "receiving")))((("receiving bitcoins")))使用_接收_按鈕，顯示一個QR碼，如<<wallet_receive>>所示。
 
 [role="width-50"]
 [[wallet_receive]]
-.Alice uses the Receive screen on her mobile Bitcoin wallet and displays her address in a QR code format.
-image::images/mbc3_0101.png["Wallet receive screen with QR code displayed.  Image derived from Bitcoin Design Guide CC-BY"]
+.Alice在她的行動比特幣錢包上使用接收畫面，並以QR碼格式顯示她的地址。
+image::images/mbc3_0101.png["錢包接收畫面，顯示QR碼。圖片源自Bitcoin Design Guide CC-BY"]
 
-The QR code is the square with a pattern of black and white dots, serving as a form of barcode that contains the same information in a format that can be scanned by Joe's smartphone camera.
+QR碼是帶有黑白點圖案的方形，作為條碼的一種形式，包含與Joe的智慧型手機攝影機可以掃描的格式相同的資訊。
 
 [WARNING]
 ====
-Any funds sent to the addresses in this book will be lost.  If you want
-to test sending bitcoins, please consider donating it to a
-bitcoin-accepting charity.
+發送到本書中地址的任何資金都將丟失。如果你想測試發送比特幣，請考慮將其捐贈給接受比特幣的慈善機構。
 ====
 
 [[getting_first_bitcoin]]
-==== Getting Your First Bitcoin
+==== 獲取你的第一個比特幣
 
-The((("bitcoins", "acquiring", id="bitcoin-acquire")))((("acquiring bitcoins", id="acquire-bitcoin"))) first task for new users is to acquire some bitcoin.
+新用戶的((("bitcoins", "acquiring", id="bitcoin-acquire")))((("acquiring bitcoins", id="acquire-bitcoin")))第一個任務是獲取一些比特幣。
 
-Bitcoin transactions are irreversible. Most electronic payment networks such as credit cards, debit cards, PayPal, and bank account transfers are reversible. For someone selling bitcoin, this difference introduces a very high risk that the buyer will reverse the electronic payment after they have received bitcoin, in effect defrauding the seller. To mitigate this risk, companies accepting traditional electronic payments in return for bitcoin usually require buyers to undergo identity verification and credit-worthiness checks, which may take several days or weeks. As a new user, this means you cannot buy bitcoin instantly with a credit card. With a bit of patience and creative thinking, however, you won't need to.
+比特幣交易是不可逆的。大多數電子支付網路，如信用卡、金融卡、PayPal和銀行帳戶轉帳都是可逆的。對於出售比特幣的人來說，這種差異帶來了很高的風險，即買家在收到比特幣後會逆轉電子支付，實際上欺騙了賣家。為了降低這種風險，接受傳統電子支付以換取比特幣的公司通常要求買家進行身份驗證和信用檢查，這可能需要幾天或幾週的時間。作為新用戶，這意味著你不能用信用卡立即購買比特幣。然而，只要有一點耐心和創造性思維，你就不需要這樣做。
 
+以下是一些新用戶獲取比特幣的方法：
 
-Here are some methods for acquiring bitcoin as a new user:
-
-* Find a friend who has bitcoins and buy some from him or her directly. Many Bitcoin users start this way. This method is the least complicated. One way to meet people with bitcoins is to attend a local Bitcoin meetup listed at pass:[<a href="https://meetup.com" class="orm:hideurl">Meetup.com</a>].
-* Earn bitcoin by selling a product or service for bitcoin. If you are a programmer, sell your programming skills. If you're a hairdresser, cut hair for bitcoins.
-* Use a Bitcoin ATM in your city.  A Bitcoin ATM is a machine that accepts cash and sends bitcoins to your smartphone Bitcoin wallet.
-* Use((("bitcoins", "currency exchanges")))((("currency exchanges"))) a Bitcoin currency exchange linked to your bank account. Many countries now have currency exchanges that offer a market for buyers and sellers to swap bitcoins with local currency. Exchange-rate listing services, such as https://bitcoinaverage.com[BitcoinAverage], often show a list of Bitcoin exchanges for each currency.
+* 找一個擁有比特幣的朋友，直接從他那裡購買一些。許多比特幣用戶都是這樣開始的。這種方法最簡單。結識擁有比特幣的人的一種方式是參加在pass:[<a href="https://meetup.com" class="orm:hideurl">Meetup.com</a>]上列出的當地比特幣聚會。
+* 通過出售產品或服務來賺取比特幣。如果你是一名程式設計師，出售你的程式設計技能。如果你是一名理髮師，為比特幣理髮。
+* 使用你所在城市的比特幣ATM。比特幣ATM是一台接受現金並向你的智慧型手機比特幣錢包發送比特幣的機器。
+* 使用((("bitcoins", "currency exchanges")))((("currency exchanges")))與你的銀行帳戶連結的比特幣貨幣交易所。許多國家現在都有提供買賣雙方交換比特幣和當地貨幣市場的貨幣交易所。匯率列表服務，如https://bitcoinaverage.com[BitcoinAverage]，通常顯示每個貨幣的比特幣交易所列表。
 
 [TIP]
 ====
-One of the advantages of
-Bitcoin over other payment systems is that, when used correctly, it
-affords users much more privacy. Acquiring, holding, and spending
-bitcoin does not require you to divulge sensitive and personally
-identifiable information to third parties. However, where bitcoin
-touches traditional systems, such as currency exchanges, national and
-international regulations often apply. In order to exchange bitcoin for
-your national currency, you will often be required to provide proof of
-identity and banking information. Users should be aware that once a
-Bitcoin address is attached to an identity, other associated Bitcoin
-transactions may also become easy to identify and track--including
-transactions made earlier. This is one reason
-many users choose to maintain dedicated exchange accounts independent from
-their wallets.
+比特幣相對於其他支付系統的優勢之一是，當正確使用時，它為用戶提供更多的隱私。獲取、持有和使用比特幣不需要你向第三方披露敏感和個人識別資訊。然而，當比特幣接觸傳統系統時，例如貨幣交易所，通常適用國家和國際法規。為了將比特幣兌換成你的國家貨幣，你通常需要提供身份證明和銀行資訊。用戶應該意識到，一旦比特幣地址與身份關聯，其他相關的比特幣交易也可能變得容易識別和追蹤--包括之前進行的交易。這是許多用戶選擇維持獨立的交易所帳戶，與他們的錢包分開的原因之一。
 ====
 
-Alice was introduced to Bitcoin by a friend, so she has an easy way to acquire her first bitcoins. Next, we will look at how she buys bitcoins from her friend Joe and how Joe sends the bitcoins to her ((("bitcoins", "acquiring", startref="bitcoin-acquire")))((("acquiring bitcoins", startref="acquire-bitcoin")))wallet.
+Alice是由朋友介紹認識比特幣的，所以她有一個簡單的方式來獲取她的第一個比特幣。接下來，我們將看看她如何從她的朋友Joe那裡購買比特幣，以及Joe如何將比特幣發送到她的((("bitcoins", "acquiring", startref="bitcoin-acquire")))((("acquiring bitcoins", startref="acquire-bitcoin")))錢包。
 
 [[bitcoin_price]]
-==== Finding the Current Price of Bitcoin
+==== 找到比特幣的當前價格
 
-Before ((("bitcoins", "exchange rate", id="bitcoin-exchange-rate")))((("exchange rate", id="exchange-rate")))((("current price of bitcoins", id="current-price")))Alice can buy bitcoin from Joe, they have to agree on the _exchange rate_ between bitcoin and US dollars. This brings up a common question for those new to Bitcoin: "Who sets the price
-of bitcoins?" The short answer is that the price is set by markets.
+在((("bitcoins", "exchange rate", id="bitcoin-exchange-rate")))((("exchange rate", id="exchange-rate")))((("current price of bitcoins", id="current-price")))Alice可以從Joe那裡購買比特幣之前，他們必須就比特幣和美元之間的_匯率_達成一致。這引發了比特幣新手的一個常見問題：「誰設定比特幣的價格？」簡短的回答是價格是由市場設定的。
 
-Bitcoin, like most other currencies, has a _floating exchange rate_. That means that the value of bitcoin fluctuates according to supply and demand in the various markets where it is traded. For example, the "price" of bitcoin in US dollars is calculated in each market based on the most recent trade of bitcoins and US dollars. As such, the price tends to fluctuate minutely several times per second. A pricing service will aggregate the prices from several markets and calculate a volume-weighted average representing the broad market exchange rate of a currency pair (e.g., BTC/USD).
+比特幣，像大多數其他貨幣一樣，有_浮動匯率_。這意味著比特幣的價值根據其交易的各個市場的供需而波動。例如，比特幣在美元中的「價格」是根據每個市場中比特幣和美元的最新交易計算的。因此，價格往往每秒鐘都會有微小的波動。定價服務會匯總來自多個市場的價格，並計算出代表廣泛市場匯率的成交量加權平均值（例如，BTC/USD）。
 
-There are hundreds of applications and websites that can provide the current market rate. Here are some of the most popular:
+有數百個應用程式和網站可以提供當前市場匯率。以下是一些最受歡迎的：
 
-https://bitcoinaverage.com[Bitcoin Average]:: A site that provides a simple view of the volume-weighted average for each currency.
-https://coincap.io[CoinCap]:: A service listing the market capitalization and exchange rates of hundreds of cryptocurrencies, including bitcoins.
-https://oreil.ly/ACieC[Chicago Mercantile Exchange Bitcoin Reference Rate]:: A reference rate that can be used for institutional and contractual reference, provided as part of investment data feeds by the CME.
+https://bitcoinaverage.com[Bitcoin Average]:: 一個提供每個貨幣成交量加權平均值的簡單視圖的網站。
+https://coincap.io[CoinCap]:: 一個列出數百種加密貨幣（包括比特幣）的市值和匯率的服務。
+https://oreil.ly/ACieC[芝加哥商業交易所比特幣參考匯率]:: 一個可用於機構和合約參考的參考匯率，作為CME投資數據饋送的一部分提供。
 
-In addition to these various sites and applications, some Bitcoin
-wallets will automatically convert amounts between bitcoin and other currencies.
+除了這些各種網站和應用程式外，一些比特幣錢包會自動在比特幣和其他貨幣之間轉換金額。
 
 [[sending_receiving]]
-==== Sending and Receiving Bitcoin
+==== 發送和接收比特幣
 
-Alice ((("bitcoins", "spending", id="bitcoin-send")))((("spending bitcoins", id="send-bitcoin")))((("bitcoins", "receiving", id="bitcoin-receive")))((("receiving bitcoins", id="receive-bitcoin")))has
-decided to buy 0.001 bitcoins. After she and Joe check the exchange rate,
-she gives Joe an appropriate amount of cash, opens her mobile wallet
-application, and selects Receive. This
-displays a QR code with Alice's first Bitcoin address.
+Alice((("bitcoins", "spending", id="bitcoin-send")))((("spending bitcoins", id="send-bitcoin")))((("bitcoins", "receiving", id="bitcoin-receive")))((("receiving bitcoins", id="receive-bitcoin")))決定購買0.001比特幣。在她和Joe檢查匯率後，她給了Joe適當的現金，打開她的行動錢包應用程式，並選擇接收。這顯示了一個包含Alice第一個比特幣地址的QR碼。
 
-Joe then selects Send on his smartphone wallet and opens the QR code
-scanner.  This allows Joe to scan the barcode with his smartphone camera
-so that he doesn't have to type in Alice's Bitcoin address, which is
-quite long.
+Joe然後在他的智慧型手機錢包上選擇發送，並打開QR碼掃描器。這允許Joe用他的智慧型手機攝影機掃描條碼，這樣他就不必輸入Alice的比特幣地址，這個地址相當長。
 
-Joe now has Alice's Bitcoin address set as the recipient. Joe enters the amount as 0.001 bitcoins (BTC); see <<wallet-send>>.  Some wallets may
-show the amount in a different denomination: 0.001 BTC is 1 millibitcoin
-(mBTC) or 100,000 satoshis (sats).
+Joe現在將Alice的比特幣地址設為接收者。Joe輸入金額為0.001比特幣（BTC）；見<<wallet-send>>。一些錢包可能以不同的面額顯示金額：0.001 BTC是1毫比特幣（mBTC）或100,000聰（sats）。
 
-Some wallets may also suggest Joe enter a label for this transaction; if
-so, Joe enters "Alice".  Weeks or months from now, this will help Joe
-remember why he sent these 0.001 bitcoins.  Some wallets may also prompt
-Joe about fees.  Depending on the wallet and how the transaction is
-being sent, the wallet may ask Joe to either enter a transaction fee rate or
-prompt him with a suggested fee (or fee rate).  The higher the transaction fee, the
-faster the transaction will be confirmed (see <<confirmations>>).
+一些錢包可能還建議Joe為這筆交易輸入標籤；如果是這樣，Joe輸入「Alice」。幾週或幾個月後，這將幫助Joe記住他為什麼發送這些0.001比特幣。一些錢包可能還會提示Joe關於費用。根據錢包和交易發送的方式，錢包可能要求Joe輸入交易費率或提示他建議的費用（或費率）。交易費越高，交易確認得越快（見<<confirmations>>）。
 
 [[wallet-send]]
-.Bitcoin wallet send screen.
-image::images/mbc3_0102.png["Wallet send screen.  Image derived from Bitcoin Design Guide CC-BY"]
+.比特幣錢包發送畫面。
+image::images/mbc3_0102.png["錢包發送畫面。圖片源自Bitcoin Design Guide CC-BY"]
 
-Joe then carefully checks to make sure he has entered the correct
-amount, because he is about to transmit money and mistakes will soon become
-irreversible. After double-checking the address and amount, he presses
-Send to transmit the transaction. Joe's mobile Bitcoin wallet constructs
-a transaction that assigns 0.001 BTC to the address provided by Alice,
-sourcing the funds from Joe's wallet, and signing the transaction with
-Joe's private keys. This tells the Bitcoin network that Joe has
-authorized a transfer of value to Alice's new address. As the
-transaction is transmitted via the peer-to-peer protocol, it quickly
-propagates across the Bitcoin network. After just a few seconds, most of
-the well-connected nodes in the network receive the transaction and see
-Alice's address for the first time.
+Joe然後仔細檢查以確保他輸入了正確的金額，因為他即將傳輸資金，錯誤很快就會變得不可逆轉。在雙重檢查地址和金額後，他按下發送來傳輸交易。Joe的行動比特幣錢包構建了一個交易，將0.001 BTC分配給Alice提供的地址，從Joe的錢包中獲取資金，並用Joe的私鑰簽署交易。這告訴比特幣網路Joe已授權將價值轉移給Alice的新地址。當交易通過點對點協議傳輸時，它迅速在比特幣網路中傳播。僅僅幾秒鐘後，網路中大多數連接良好的節點就收到了交易，並第一次看到Alice的地址。
 
-Meanwhile, Alice's wallet is constantly "listening" for new
-transactions on the Bitcoin network, looking for any that match the
-addresses it contains. A few seconds after Joe's wallet transmits the
-transaction, Alice's wallet will indicate that it is receiving
-0.001 BTC.
+與此同時，Alice的錢包不斷「監聽」比特幣網路上的新交易，尋找與其包含的地址匹配的任何交易。在Joe的錢包傳輸交易幾秒鐘後，Alice的錢包將顯示她正在接收0.001 BTC。
 
 [[confirmations]]
-.Confirmations
+.確認
 ****
-At first, ((("bitcoins", "clearing transactions")))((("clearing transactions")))((("transactions", "clearing")))((("confirmations")))Alice's address will show the transaction from Joe as "Unconfirmed." This means that the transaction has been propagated to the network but has not yet been recorded in the Bitcoin transaction journal, known as the blockchain. To be confirmed, a transaction must be included in a block and added to the blockchain, which happens every 10 minutes, on average. In traditional financial terms this is known as _clearing_. For more details on propagation, validation, and clearing (confirmation) of bitcoin transactions, see <<mining>>.
+一開始，((("bitcoins", "clearing transactions")))((("clearing transactions")))((("transactions", "clearing")))((("confirmations")))Alice的地址將顯示來自Joe的交易為「未確認」。這意味著交易已經傳播到網路，但尚未記錄在稱為區塊鏈的比特幣交易日誌中。要被確認，交易必須被包含在一個區塊中並添加到區塊鏈中，這平均每10分鐘發生一次。在傳統金融術語中，這被稱為_清算_。有關比特幣交易的傳播、驗證和清算（確認）的更多細節，見<<mining>>。
 ****
 
-Alice is now the proud owner of 0.001 BTC that she can spend. Over the next few days, Alice buys more bitcoin using an ATM and((("bitcoins", "spending", startref="bitcoin-send")))((("spending bitcoins", startref="send-bitcoin")))((("bitcoins", "receiving", startref="bitcoin-receive")))((("receiving bitcoins", startref="receive-bitcoin"))) an exchange. In the next chapter we will look at her first purchase with Bitcoin, and examine the underlying transaction and propagation technologies in more detail.
+Alice現在是0.001 BTC的驕傲擁有者，她可以花費這些比特幣。在接下來的幾天裡，Alice使用ATM和((("bitcoins", "spending", startref="bitcoin-send")))((("spending bitcoins", startref="send-bitcoin")))((("bitcoins", "receiving", startref="bitcoin-receive")))((("receiving bitcoins", startref="receive-bitcoin")))交易所購買更多比特幣。在下一章中，我們將看看她的第一次比特幣購買，並更詳細地檢視底層的交易和傳播技術。
